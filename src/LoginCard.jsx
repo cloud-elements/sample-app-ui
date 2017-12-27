@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 class LoginCard extends Component {
@@ -10,8 +10,8 @@ class LoginCard extends Component {
       }
 
     getOAuthUrl() {
-        let {userToken, orgToken, vendorApiKey, vendorSecret, vendorCallbackUrl, baseUrl} = this.props;
-        let path= 'elements/hubspot/oauth/url';
+        let {userToken, orgToken, elementKey, vendorApiKey, vendorSecret, vendorCallbackUrl, baseUrl} = this.props;
+        let path= `elements/${elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
         let queryParams =`apiKey=${vendorApiKey}&apiSecret=${vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
         // The configuration for fetching data
@@ -22,7 +22,6 @@ class LoginCard extends Component {
             'Content-Type': 'application/json'
             }
         }
-
         const request = async () => {
             const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
             const json = await response.json();
@@ -40,6 +39,7 @@ class LoginCard extends Component {
 
     render(){
         let { redirectUrl } = this.state;
+        let { elementKey } = this.props;
         return(
             <Card
                 style={{
@@ -49,8 +49,8 @@ class LoginCard extends Component {
                 }}
             >
                 <CardHeader
-                    title="Hubspot"
-                    subtitle="Connect your Hubspot account"
+                    title={elementKey}
+                    subtitle={"Connect your "+ elementKey + " account"}
                     actAsExpander={false}
                 />
                 <CardActions>

@@ -53,6 +53,7 @@ class App extends Component {
                     errorMessage={ errorMessage }
                     baseUrl={'https://' + ceEnv + '.cloud-elements.com/elements/api-v2'}
                     vendorCallbackUrl={ appUrl }
+                    elementKey={ 'hubspot' }
                 />
             </div>
         </MuiThemeProvider>
