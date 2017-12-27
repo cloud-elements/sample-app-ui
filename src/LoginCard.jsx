@@ -10,27 +10,36 @@ class LoginCard extends Component {
       }
 
     getOAuthUrl() {
-        let {userToken, orgToken, elementToken, baseUrl} = this.props;
-        // let baseUrl = 'https://api.cloud-elements.com/elements/api-v2';
-        let path= 'contacts';
+        let {userToken, orgToken, vendorApiKey, vendorSecret, vendorCallbackUrl, baseUrl} = this.props;
+        let path= 'elements/hubspot/oauth/url';
+        // The query parameters with the api key, api secret, and callback url.
+        let queryParams =`apiKey=${vendorApiKey}&apiSecret=${vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
         // The configuration for fetching data
         let config = {
             method: 'GET',
             headers: {
-            'Authorization': `User ${userToken}, Organization ${orgToken}, Element ${elementToken}`,
+            'Authorization': `User ${userToken}, Organization ${orgToken}`,
             'Content-Type': 'application/json'
             }
         }
-        fetch(`${baseUrl}/${path}`, config)
-            .then(response => response.json())
-            .then(responseJson => {
+
+        const request = async () => {
+            const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
+            const json = await response.json();
+            console.log(json);
             this.setState({
-                resources: responseJson,
+                redirectUrl: json.oauthUrl,
             })
-            })
+        }
+        request();
     }
 
+    componentWillMount() {
+        this.getOAuthUrl();
+      }
+
     render(){
+        let { redirectUrl } = this.state;
         return(
             <Card
                 style={{
@@ -47,6 +56,9 @@ class LoginCard extends Component {
                 <CardActions>
                     <FlatButton
                         label="Login"
+                        onClick= {function(){
+                            window.location = redirectUrl
+                        }}
                         />
                 </CardActions>
             </Card>
