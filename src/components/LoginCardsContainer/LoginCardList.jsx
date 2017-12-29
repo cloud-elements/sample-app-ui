@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import LoginCard from './LoginCard/LoginCard.jsx';
-
+import './LoginCardList.css';
 
 class LoginCardList extends Component {
     constructor(props) {
@@ -16,10 +16,10 @@ class LoginCardList extends Component {
                     vendorSecret: process.env.REACT_APP_HUBSPOT_SECRET
                 },
                 // {
-                    // nameText: "Salesforce",
-                    // elementKey: "sfdc",
-                    // vendorApiKey: process.env.REACT_APP_SFDC_KEY,
-                    // vendorSecret: process.env.REACT_APP_SFDC_SECRET
+                //     nameText: "Salesforce",
+                //     elementKey: "sfdc",
+                //     vendorApiKey: process.env.REACT_APP_SFDC_KEY,
+                //     vendorSecret: process.env.REACT_APP_SFDC_SECRET
                 // }
             ]
         };

@@ -36,6 +36,8 @@ class App extends Component {
                     ceKeys={ ceKeys}
                     appUrl={ appUrl}
                 />
+                {/* TODO: Add dashboard for more data */}
+                {/* <DataDashboard /> */}
             </div>
         </MuiThemeProvider>
     );

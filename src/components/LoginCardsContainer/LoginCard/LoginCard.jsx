@@ -42,9 +42,9 @@ class LoginCard extends Component {
         let elementName = this.props.vendorData.nameText;
         return(
             <Card
+                className="LoginCard"
                 style={{
-                    width: '400px',
-                    margin: '40px',
+                    margin: '20px',
                     float: 'left'
                 }}
             >
