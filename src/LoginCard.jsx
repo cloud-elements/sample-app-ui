@@ -10,15 +10,15 @@ class LoginCard extends Component {
       }
 
     getOAuthUrl() {
-        let {userToken, orgToken, elementKey, vendorApiKey, vendorSecret, vendorCallbackUrl, baseUrl} = this.props;
-        let path= `elements/${elementKey}/oauth/url`;
+        let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
+        let path= `elements/${vendorData.elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
-        let queryParams =`apiKey=${vendorApiKey}&apiSecret=${vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        let queryParams =`apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
         // The configuration for fetching data
         let config = {
             method: 'GET',
             headers: {
-            'Authorization': `User ${userToken}, Organization ${orgToken}`,
+            'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}`,
             'Content-Type': 'application/json'
             }
         }
@@ -39,7 +39,7 @@ class LoginCard extends Component {
 
     render(){
         let { redirectUrl } = this.state;
-        let { elementKey } = this.props;
+        let elementName = this.props.vendorData.nameText;
         return(
             <Card
                 style={{
@@ -49,8 +49,8 @@ class LoginCard extends Component {
                 }}
             >
                 <CardHeader
-                    title={elementKey}
-                    subtitle={"Connect your "+ elementKey + " account"}
+                    title={elementName}
+                    subtitle={"Connect your "+ elementName + " account"}
                     actAsExpander={false}
                 />
                 <CardActions>
