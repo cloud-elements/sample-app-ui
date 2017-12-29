@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LoginCard from './LoginCard.jsx';
+import LoginCard from './LoginCard/LoginCard.jsx';
 
 
 class LoginCardList extends Component {

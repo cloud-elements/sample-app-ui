@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import LoginCardList from './LoginCardList';
-import AppBar from './AppBar';
+import LoginCardList from './components/LoginCardsContainer/LoginCardList';
+import NavBar from './components/NavBar/NavBar';
 
 // Theme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -31,7 +31,7 @@ class App extends Component {
     return (
         <MuiThemeProvider>
             <div className="App">
-                <AppBar />
+                <NavBar />
                 <LoginCardList
                     ceKeys={ ceKeys}
                     appUrl={ appUrl}
