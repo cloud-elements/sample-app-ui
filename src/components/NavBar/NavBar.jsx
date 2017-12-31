@@ -1,18 +1,72 @@
+// import React from 'react';
+// import AppBar from 'material-ui/AppBar';
+// import Toolbar from 'material-ui/ToolBar';
+
+// /**
+//  * A simple example of `AppBar` with an icon on the right.
+//  * By default, the left icon is a navigation-menu.
+//  */
+// const AppBarExampleIcon = () => (
+// //   <AppBar
+// //     title="Simple SaaS App"
+// //     iconClassNameRight="muidocs-icon-navigation-expand-more"
+// //     style={{
+// //         background: "#a3a3a3"
+// //     }}
+// //   />
+//   <AppBar position="static" color="default">
+//         <Toolbar>
+//           {/* <Typography type="title" color="inherit"> */}
+//             Title
+//           {/* </Typography> */}
+//         </Toolbar>
+//       </AppBar>
+// );
+
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
 
-/**
- * A simple example of `AppBar` with an icon on the right.
- * By default, the left icon is a navigation-menu.
- */
-const AppBarExampleIcon = () => (
-  <AppBar
-    title="Simple SaaS App"
-    iconClassNameRight="muidocs-icon-navigation-expand-more"
-    style={{
-        background: "#a3a3a3"
-    }}
-  />
-);
+const styles = {
+  root: {
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
-export default AppBarExampleIcon;
+function ButtonAppBar(props) {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography type="title" color="inherit" className={classes.flex}>
+            Simple SaaS App
+          </Typography>
+          <Button color="contrast">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
+
+ButtonAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ButtonAppBar);

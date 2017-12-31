@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import LoginCardList from './components/LoginCardsContainer/LoginCardList';
 import NavBar from './components/NavBar/NavBar';
 
-// Theme
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 // Click handler
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
@@ -29,17 +26,15 @@ class App extends Component {
   render() {
     let { ceKeys, appUrl } = this.state;
     return (
-        <MuiThemeProvider>
-            <div className="App">
-                <NavBar />
-                <LoginCardList
-                    ceKeys={ ceKeys}
-                    appUrl={ appUrl}
-                />
-                {/* TODO: Add dashboard for more data */}
-                {/* <DataDashboard /> */}
-            </div>
-        </MuiThemeProvider>
+        <div className="App">
+            <NavBar />
+            <LoginCardList
+                ceKeys={ ceKeys}
+                appUrl={ appUrl}
+            />
+            {/* TODO: Add dashboard for more data */}
+            {/* <DataDashboard /> */}
+        </div>
     );
   }
 }

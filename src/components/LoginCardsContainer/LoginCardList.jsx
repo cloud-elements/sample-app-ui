@@ -31,6 +31,7 @@ class LoginCardList extends Component {
         // return as many LoginCards as needed for the number of elements in the state.elements array
         return this.state.elements.map(element => (
             <LoginCard 
+                key={ element.elementKey }
                 vendorData={ element }
                 ceKeys={ ceKeys }
                 errorMessage={ errorMessage }

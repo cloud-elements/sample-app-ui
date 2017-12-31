@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import Card, { CardActions, CardHeader} from 'material-ui/Card';
+import Button from 'material-ui/Button';
 
 class LoginCard extends Component {
     constructor(props) {
@@ -50,16 +50,17 @@ class LoginCard extends Component {
             >
                 <CardHeader
                     title={elementName}
-                    subtitle={"Connect your "+ elementName + " account"}
-                    actAsExpander={false}
+                    subheader={"Connect your "+ elementName + " account"}
                 />
                 <CardActions>
-                    <FlatButton
-                        label="Login"
+                    <Button
+                        raised
                         onClick= {function(){
                             window.location = redirectUrl
                         }}
-                        />
+                    >
+                        Login
+                    </Button>
                 </CardActions>
             </Card>
         )
