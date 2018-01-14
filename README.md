@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Boilerplate code for a bare bones React frontend that can be used to build UI demos on the Cloud Elements APIs
 
+<img width="1187" alt="UI Screenshot" src="https://user-images.githubusercontent.com/13320316/34920721-25a7a260-f934-11e7-866f-4415b69188f1.png">
+
 ## Setup
 
 In the project directory, install dependencies.

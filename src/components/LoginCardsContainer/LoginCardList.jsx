@@ -40,7 +40,7 @@ class LoginCardList extends Component {
                 vendorData={ element }
                 ceKeys={ ceKeys }
                 errorMessage={ errorMessage }
-                baseUrl={'https://' + ceKeys.ceEnv + '.cloud-elements.com/elements/api-v2'}
+                baseUrl={'https://' + [ceKeys.ceEnv || 'api'] + '.cloud-elements.com/elements/api-v2'}
                 vendorCallbackUrl={ appUrl }
             />
         ));
@@ -60,7 +60,7 @@ class LoginCardList extends Component {
                         vendorData={ element }
                         ceKeys={ ceKeys }
                         errorMessage={ errorMessage }
-                        baseUrl={'https://' + ceKeys.ceEnv + '.cloud-elements.com/elements/api-v2'}
+                        baseUrl={'https://' + [ceKeys.ceEnv || 'api'] + '.cloud-elements.com/elements/api-v2'}
                         vendorCallbackUrl={ appUrl }
                     />
                 ))}
