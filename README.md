@@ -2,6 +2,42 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Boilerplate code for a bare bones React frontend that can be used to build UI demos on the Cloud Elements APIs
 
+## Setup
+
+In the project directory, install dependencies.
+
+## `npm install` or `yarn install`
+
+Create an enviroment file to store keys and tokens.
+
+## `touch .env` or `touch .env.local`
+
+Add your Cloud Elements keys to the `.env` file:
+
+```
+## Cloud Elements keys
+REACT_APP_CE_USER={your-cloud-elements-user-token}
+REACT_APP_CE_ORG={your-cloud-elements-org-token}
+REACT_APP_CE_ENV=[optional for using staging or snapshot, app defaults to production]
+```
+
+Add your vendor OAuth app keys to the `.env` file. Only one is need for the app to function, but total number is unlimited.
+
+```
+## Vendor App keys
+REACT_APP_HUBSPOT_KEY={your-hubspot-oauth-app-key}
+REACT_APP_HUBSPOT_SECRET={your-hubspot-oauth-app-secret}
+REACT_APP_SFDC_KEY={your-sfdc-oauth-app-key}
+REACT_APP_SFDC_SECRET={your-sfdc-oauth-app-secret}
+```
+
+Add the https url where your app is available so that vendor OAuth flows know where to return to after a user signs in.
+
+```
+## Misc
+REACT_APP_URL=https://c720e32b.ngrok.io
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
