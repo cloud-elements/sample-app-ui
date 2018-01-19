@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import Card, { CardActions, CardHeader} from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import queryString from 'query-string';
+import { createInstance } from '../../../ce-util';
 
 class LoginCard extends Component {
     constructor(props) {
         super(props);
         this.state = {};
         this.getOAuthUrl = this.getOAuthUrl.bind(this);
+        this.createInstance = this.createInstance.bind(this);
       }
 
     getOAuthUrl() {
@@ -33,8 +36,16 @@ class LoginCard extends Component {
         request();
     }
 
+
+
     componentWillMount() {
+        let queryParams = queryString.parse(window.location.search);
+        // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
+        if(!queryParams.code) {
         this.getOAuthUrl();
+        } else {
+        this.createInstance(queryParams.code, queryParams.state);
+        }
       }
 
     render(){
