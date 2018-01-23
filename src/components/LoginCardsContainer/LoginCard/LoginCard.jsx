@@ -56,7 +56,9 @@ class LoginCard extends Component {
             const json = await response.json();
             console.log(response);
             // console.log(response);
-            await db(state, json.token);
+            if (await json.token){
+                await db(state, json.token);
+            }
         }
         request();
     }
