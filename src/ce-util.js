@@ -22,9 +22,8 @@ const createInstanceBody = (elementKey, code, appURL, vendorData) => {
         };
     return postInstanceBody;
     } else {
-        throw "missing required parameters for instance body";
+        throw new Error("missing required parameters for instance body");
     }
-   
 };
 
 

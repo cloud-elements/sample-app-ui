@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Card, { CardActions, CardHeader} from 'material-ui/Card';
-import Button from 'material-ui/Button';
 import queryString from 'query-string';
+import ConnectButton from './ConnectButton';
 import { instanceBody } from '../../../ce-util';
 import db from 'store2';
 
@@ -54,8 +54,7 @@ class LoginCard extends Component {
             console.log(config);
             const response = await fetch(`${baseUrl}/${path}`, config);
             const json = await response.json();
-            console.log(response);
-            // console.log(response);
+            // store instance token on response
             if (await json.token){
                 await db(state, json.token);
             }
@@ -63,22 +62,30 @@ class LoginCard extends Component {
         request();
     }
 
-
-
     componentWillMount() {
         let {vendorData} = this.props;
         let queryParams = queryString.parse(window.location.search);
         // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
         if(!queryParams.code) {
-        this.getOAuthUrl();
+            this.getOAuthUrl();
         } else if (queryParams.state === vendorData.elementKey){
-        this.createInstance(queryParams.code, queryParams.state);
+            this.createInstance(queryParams.code, queryParams.state);
+        }
+        if (db(vendorData.elementKey)) {
+            console.log('storage!');
+            this.setState({
+                connected: true
+            });
         }
       }
 
     render(){
-        let { redirectUrl } = this.state;
+        let { redirectUrl, connected } = this.state;
         let elementName = this.props.vendorData.nameText;
+        let cardSubHeader = "Connect your "+ elementName + " account";
+        if (connected){
+            cardSubHeader = elementName + " is connected.";
+        }
         return(
             <Card
                 className="LoginCard"
@@ -89,17 +96,13 @@ class LoginCard extends Component {
             >
                 <CardHeader
                     title={elementName}
-                    subheader={"Connect your "+ elementName + " account"}
+                    subheader={cardSubHeader}
                 />
                 <CardActions>
-                    <Button
-                        raised
-                        onClick= {function(){
-                            window.location = redirectUrl
-                        }}
-                    >
-                        Login
-                    </Button>
+                    <ConnectButton 
+                        connected={connected}
+                        redirectUrl={redirectUrl}
+                    />
                 </CardActions>
             </Card>
         )
