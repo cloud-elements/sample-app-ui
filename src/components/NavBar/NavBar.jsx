@@ -1,28 +1,3 @@
-// import React from 'react';
-// import AppBar from 'material-ui/AppBar';
-// import Toolbar from 'material-ui/ToolBar';
-
-// /**
-//  * A simple example of `AppBar` with an icon on the right.
-//  * By default, the left icon is a navigation-menu.
-//  */
-// const AppBarExampleIcon = () => (
-// //   <AppBar
-// //     title="Simple SaaS App"
-// //     iconClassNameRight="muidocs-icon-navigation-expand-more"
-// //     style={{
-// //         background: "#a3a3a3"
-// //     }}
-// //   />
-//   <AppBar position="static" color="default">
-//         <Toolbar>
-//           {/* <Typography type="title" color="inherit"> */}
-//             Title
-//           {/* </Typography> */}
-//         </Toolbar>
-//       </AppBar>
-// );
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -52,7 +27,13 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
+          <IconButton 
+            className={classes.menuButton} 
+            color="contrast" 
+            aria-label="Menu"
+            //TODO: point this onclick function to open MenuDrawer
+            onClick={this.handleDrawerOpen}
+          >
             <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
