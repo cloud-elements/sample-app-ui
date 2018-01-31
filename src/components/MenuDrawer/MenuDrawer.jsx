@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
+import IconButton from 'material-ui/IconButton';
+import Divider from 'material-ui/Divider';
+import List from 'material-ui/List';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
+import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
 const styles = theme => ({
     drawerPaper: {
         position: 'relative',
         height: '100%',
-        width: drawerWidth,
+        width: 240,
       },
       drawerHeader: {
         display: 'flex',
@@ -19,46 +26,51 @@ const styles = theme => ({
 class MenuDrawer extends Component {
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            open: false
+        };
     }
 
-    handleDrawerOpen = () => {
-        this.setState({ open: true });
-    };
-    
     handleDrawerClose = () => {
         this.setState({ open: false });
-    };
+      };
+
+    // componentWillMount(){
+    //     let {open} = this.props;
+    //     this.setState({open: open})
+    // }
 
     render(){
+        const { classes, theme, drawerWidth } = this.props;
+        const { open } = this.state;
         return(
             <Drawer
-                type="persistent"
-                classes={{
+              type="persistent"
+              classes={{
                 paper: classes.drawerPaper,
-                }}
-                anchor="left"
-                open={open}
+              }}
+              anchor='left'
+              open={open}
             >
-                <div className={classes.drawerInner}>
+              <div className={classes.drawerInner}>
                 <div className={classes.drawerHeader}>
-                    <IconButton onClick={this.handleDrawerClose}>
+                  <IconButton onClick={this.handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
+                  </IconButton>
                 </div>
                 <Divider />
-                <List className={classes.list}>{mailFolderListItems}</List>
+                <List className={classes.list}>List example 1</List>
                 <Divider />
-                <List className={classes.list}>{otherMailFolderListItems}</List>
-                </div>
+                <List className={classes.list}>List example 2</List>
+              </div>
             </Drawer>
-        );
+          );
     }
 }
 
-PersistentDrawer.propTypes = {
+MenuDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
   };
   
-  export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+  export default withStyles(styles, { withTheme: true })(MenuDrawer);
