@@ -1,20 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
+import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import List from 'material-ui/List';
+import { MenuItem } from 'material-ui/Menu';
 import Typography from 'material-ui/Typography';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-import MenuDrawer from '../MenuDrawer/MenuDrawer';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
+import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+
+import LoginCardList from '../LoginCardsContainer/LoginCardList';
+import DataTable from '../DataDashboard/DataTable';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     width: '100%',
-    height: 430,
+    // height: 430,
     marginTop: theme.spacing.unit * 3,
     zIndex: 1,
     overflow: 'hidden',
@@ -100,7 +109,7 @@ const styles = theme => ({
   },
 });
 
-class NavBar extends React.Component {
+class Navigation extends Component {
   state = {
     open: false,
     anchor: 'left',
@@ -110,9 +119,36 @@ class NavBar extends React.Component {
     this.setState({ open: true });
   };
 
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, ceKeys, appUrl } = this.props;
     const { anchor, open } = this.state;
+
+    const drawer = (
+      <Drawer
+        type="persistent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor={anchor}
+        open={open}
+      >
+        <div className={classes.drawerInner}>
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={this.handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </div>
+          <Divider />
+          <List className={classes.list}>List sample 1</List>
+          <Divider />
+          <List className={classes.list}>List sample 2</List>
+        </div>
+      </Drawer>
+    );
 
     return (
       <div className={classes.root}>
@@ -133,23 +169,22 @@ class NavBar extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography type="title" color="inherit" noWrap>
-                Saas App Demo
+                SaaS Demo App
               </Typography>
             </Toolbar>
           </AppBar>
-          <MenuDrawer
-            drawerWidth={drawerWidth}
-            classes={classes}
-            theme={theme}
-            open={open}
-          />
-
+          {drawer}
           <main
             className={classNames(classes.content, classes[`content-${anchor}`], {
               [classes.contentShift]: open,
               [classes[`contentShift-${anchor}`]]: open,
             })}
           >
+            <LoginCardList
+                ceKeys={ ceKeys}
+                appUrl={ appUrl}
+            />
+            <DataTable />
           </main>
         </div>
       </div>
@@ -157,9 +192,9 @@ class NavBar extends React.Component {
   }
 }
 
-NavBar.propTypes = {
+Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(NavBar);
+export default withStyles(styles, { withTheme: true })(Navigation);

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // import logo from './logo.svg';
-import LoginCardList from './components/LoginCardsContainer/LoginCardList';
-import NavBar from './components/NavBar/NavBar';
-import DataTable from './components/DataDashboard/DataTable';
+// import LoginCardList from './components/LoginCardsContainer/LoginCardList';
+import Navigation from './components/NavBar/NavBar';
+// import DataTable from './components/DataDashboard/DataTable';
 
 // Click handler
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -24,21 +24,22 @@ class App extends Component {
         }
     }
 
-  render() {
-    let { ceKeys, appUrl } = this.state;
-    return (
-        <div className="App">
-            <NavBar />
-            <LoginCardList
-                ceKeys={ ceKeys}
-                appUrl={ appUrl}
-            />
-            <DataTable />
-            {/* TODO: Add dashboard for more data */}
-            {/* <DataDashboard /> */}
-        </div>
-    );
-  }
+    render() {
+        let {ceKeys, appUrl} = this.state;
+        return ( 
+            <div className = "App">
+                <Navigation ceKeys = {ceKeys}
+                    appUrl = {appUrl}
+                /> {/* <LoginCardList
+                        ceKeys={ ceKeys}
+                        appUrl={ appUrl}
+                    />
+                    <DataTable /> */
+            } { /* TODO: Add dashboard for more data */ } 
+            { /* <DataDashboard /> */ } 
+            </div>
+            );
+    }
 }
 
 export default App;
