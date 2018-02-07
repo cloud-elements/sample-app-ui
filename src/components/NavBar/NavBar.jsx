@@ -5,16 +5,13 @@ import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
-import { MenuItem } from 'material-ui/Menu';
 import Typography from 'material-ui/Typography';
-import TextField from 'material-ui/TextField';
-import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
+import ObjectMenu from '../ObjectMenu';
 import LoginCardList from '../LoginCardsContainer/LoginCardList';
 import DataTable from '../DataDashboard/DataTable';
 
@@ -141,11 +138,8 @@ class Navigation extends Component {
             <IconButton onClick={this.handleDrawerClose}>
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
+            <ObjectMenu classes={classes}/>
           </div>
-          <Divider />
-          <List className={classes.list}>List sample 1</List>
-          <Divider />
-          <List className={classes.list}>List sample 2</List>
         </div>
       </Drawer>
     );
