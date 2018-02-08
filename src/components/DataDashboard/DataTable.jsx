@@ -6,8 +6,7 @@ import Paper from 'material-ui/Paper';
 
 const styles = theme => ({
   root: {
-    width: "95%",
-    margin: theme.spacing.unit * 3,
+    margin: (theme.spacing.unit * 3) - 4,
     overflowX: 'auto',
   },
   table: {
@@ -43,7 +42,7 @@ class Datatable extends Component {
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Dessert (100g serving)</TableCell>
+                  <TableCell>Last Name</TableCell>
                   <TableCell numeric>Calories</TableCell>
                   <TableCell numeric>Fat (g)</TableCell>
                   <TableCell numeric>Carbs (g)</TableCell>
