@@ -136,8 +136,8 @@ class Navigation extends Component {
             <IconButton onClick={this.handleDrawerClose}>
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
-            <ObjectMenu classes={classes}/>
           </div>
+          <ObjectMenu classes={classes}/>
         </div>
       </Drawer>
     );

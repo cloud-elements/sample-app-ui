@@ -1,21 +1,52 @@
 import React, {Component} from 'react';
 import Divider from 'material-ui/Divider';
-import List from 'material-ui/List';
+import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import ContactIcon from 'material-ui-icons/Contacts';
+import IntegrationIcon from 'material-ui-icons/Extension';
+import SettingsIcon from 'material-ui-icons/Settings';
+import AccountIcon from 'material-ui-icons/Work';
 
 class ObjectMenu extends Component {
-
+    // TODO: add constructor for routing etc
 
     render(){
         const {classes} = this.props;
         return(
-            <div>
+            <div className={classes.root}>
+                <List component="nav">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <ContactIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Contacts" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AccountIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Accounts" />
+                    </ListItem>
+                </List>
                 <Divider />
-                <List className={classes.list}>List sample 1</List>
-                <Divider />
-                <List className={classes.list}>List sample 2</List>
+                <List component="nav">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <IntegrationIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Integrations" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Settings" />
+                    </ListItem>
+                </List>
             </div>
         );
     }
 }
 
 export default ObjectMenu;
+
+
