@@ -176,7 +176,8 @@ class Navigation extends Component {
                 ceKeys={ ceKeys}
                 appUrl={ appUrl}
             />
-            <DataTable />
+            {/* pass data content type from routing to table */}
+            <DataTable contentType="contacts"/>
           </main>
         </div>
       </div>
