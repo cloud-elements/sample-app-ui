@@ -8,19 +8,24 @@ import AccountIcon from 'material-ui-icons/Work';
 
 class ObjectMenu extends Component {
     // TODO: add constructor for routing etc
+    constructor(props) {
+        super(props);
+        this.state = {};
+        // this.routeToTable = this.routeToTable.bind(this);
+    }
 
     render(){
-        const {classes} = this.props;
+        const {classes, tableChanger} = this.props;
         return(
             <div className={classes.root}>
                 <List component="nav">
-                    <ListItem button>
+                    <ListItem button onClick={() => tableChanger("contacts")}>
                         <ListItemIcon>
                             <ContactIcon />
                         </ListItemIcon>
                         <ListItemText primary="Contacts" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => tableChanger("accounts")}>
                         <ListItemIcon>
                             <AccountIcon />
                         </ListItemIcon>

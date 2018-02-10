@@ -78,6 +78,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     height: 'calc(100% - 56px)',
+    minHeight: window.innerHeight * 0.9,
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
@@ -108,7 +109,15 @@ class Navigation extends Component {
   state = {
     open: false,
     anchor: 'left',
+    route: null
   };
+
+
+    changeRoute = (newRoute) => {
+        this.setState({
+            route: newRoute
+        });
+    }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -120,7 +129,7 @@ class Navigation extends Component {
 
   render() {
     const { classes, theme, ceKeys, appUrl } = this.props;
-    const { anchor, open } = this.state;
+    const { anchor, open, route } = this.state;
 
     const drawer = (
       <Drawer
@@ -137,7 +146,10 @@ class Navigation extends Component {
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
-          <ObjectMenu classes={classes}/>
+          <ObjectMenu 
+            classes={classes}
+            tableChanger={(newRoute) => this.changeRoute(newRoute)}
+          />
         </div>
       </Drawer>
     );
@@ -172,12 +184,13 @@ class Navigation extends Component {
               [classes[`contentShift-${anchor}`]]: open,
             })}
           >
+          {/* display main content based on route */}
             <LoginCardList
                 ceKeys={ ceKeys}
                 appUrl={ appUrl}
+                route={route}
             />
-            {/* pass data content type from routing to table */}
-            <DataTable contentType="contacts"/>
+            <DataTable contentType={route}/>
           </main>
         </div>
       </div>

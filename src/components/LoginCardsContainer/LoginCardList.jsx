@@ -16,18 +16,18 @@ class LoginCardList extends Component {
                     vendorApiKey: process.env.REACT_APP_HUBSPOT_KEY,
                     vendorSecret: process.env.REACT_APP_HUBSPOT_SECRET
                 },
-                {
-                    nameText: "Salesforce",
-                    elementKey: "sfdc",
-                    vendorApiKey: process.env.REACT_APP_SFDC_KEY,
-                    vendorSecret: process.env.REACT_APP_SFDC_SECRET
-                },
-                {
-                    nameText: "Marketo",
-                    elementKey: "marketo",
-                    vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
-                    vendorSecret: process.env.REACT_APP_MARKETO_SECRET
-                }
+                // {
+                //     nameText: "Salesforce",
+                //     elementKey: "sfdc",
+                //     vendorApiKey: process.env.REACT_APP_SFDC_KEY,
+                //     vendorSecret: process.env.REACT_APP_SFDC_SECRET
+                // },
+                // {
+                //     nameText: "Marketo",
+                //     elementKey: "marketo",
+                //     vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
+                //     vendorSecret: process.env.REACT_APP_MARKETO_SECRET
+                // }
             ]
         };
     }
