@@ -6,10 +6,12 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+
 
 import ObjectMenu from '../ObjectMenu';
 import LoginCardList from '../LoginCardsContainer/LoginCardList';
@@ -105,7 +107,7 @@ const styles = theme => ({
   },
 });
 
-class Navigation extends Component {
+class NavBar extends Component {
   state = {
     open: false,
     anchor: 'left',
@@ -113,11 +115,11 @@ class Navigation extends Component {
   };
 
 
-    changeRoute = (newRoute) => {
-        this.setState({
-            route: newRoute
-        });
-    }
+  changeRoute = (newRoute) => {
+      this.setState({
+          route: newRoute
+      });
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -153,6 +155,44 @@ class Navigation extends Component {
         </div>
       </Drawer>
     );
+    // login cards to be rendered if the integration route is live
+    const integrationCards = () => {
+      if (route === "integrations"){
+        return (<LoginCardList
+          ceKeys={ ceKeys}
+          appUrl={ appUrl}
+          route={route}
+        />);
+      } else {
+        return null;
+      }
+    };
+
+    const dataTable = () => {
+      if (route !== "integrations" && route){
+        return (<DataTable contentType={route}/>);
+      } else {
+        return null;
+      }
+    };
+
+    // basic welcome message as filler content
+    const welcome = () => {
+      if (!route){
+        return( <div>
+          <Paper className={classes.root} elevation={4}>
+            <Typography variant="headline" component="h3">
+              Welcome to your integrated application boilerplate app!
+            </Typography>
+            <Typography component="p">
+              Use the menu to connect to some apps or view dummy data before connecting to other data services.
+            </Typography>
+          </Paper>
+        </div>);
+      } else {
+        return null;
+      }
+    }
 
     return (
       <div className={classes.root}>
@@ -184,13 +224,10 @@ class Navigation extends Component {
               [classes[`contentShift-${anchor}`]]: open,
             })}
           >
-          {/* display main content based on route */}
-            <LoginCardList
-                ceKeys={ ceKeys}
-                appUrl={ appUrl}
-                route={route}
-            />
-            <DataTable contentType={route}/>
+            {/* display main content based on route */}
+            {welcome()}
+            {integrationCards()}
+            {dataTable()}
           </main>
         </div>
       </div>
@@ -198,9 +235,9 @@ class Navigation extends Component {
   }
 }
 
-Navigation.propTypes = {
+NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Navigation);
+export default withStyles(styles, { withTheme: true })(NavBar);

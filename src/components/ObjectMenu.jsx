@@ -34,7 +34,7 @@ class ObjectMenu extends Component {
                 </List>
                 <Divider />
                 <List component="nav">
-                    <ListItem button>
+                    <ListItem button onClick={() => tableChanger("integrations")}>
                         <ListItemIcon>
                             <IntegrationIcon />
                         </ListItemIcon>
