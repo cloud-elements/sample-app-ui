@@ -1,18 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Overview
 
 Boilerplate code for a bare bones React frontend that can be used to build UI demos on the Cloud Elements APIs
 
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
 <img width="1187" alt="UI Screenshot" src="https://user-images.githubusercontent.com/13320316/34920721-25a7a260-f934-11e7-866f-4415b69188f1.png">
 
-## Setup
 
-In the project directory, install dependencies.
+## Installation
+If you don't have `node` and `npm` installed, do [that](https://docs.npmjs.com/getting-started/installing-node) first.
 
-#### `npm install` or `yarn install`
+> __PROTIP:__ `node` version must be >= `v4.0.0`
 
-Create an enviroment file to store keys and tokens.
+Install the node dependencies and create an environment file to store keys and tokens
 
-#### `touch .env` or `touch .env.local`
+```bash
+ $ touch .env
+ # or 
+ touch .env.local
+ ```
 
 Add your Cloud Elements keys to the `.env` file:
 
@@ -38,6 +44,12 @@ Add the https url where your app is available so that vendor OAuth flows know wh
 ```
 ## Misc
 REACT_APP_URL=https://c720e32b.ngrok.io
+```
+```bash 
+# Install all necessary npm packages:
+$ npm install
+# or
+$ yarn install
 ```
 
 ## Available Scripts
