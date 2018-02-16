@@ -5,6 +5,7 @@ import Table, { TableHead, TableBody, TableCell, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import db from 'store2';
 // service for dummy data, later will be for live API calls
 import {dummyGenerator, headerGenerator} from './dummyDataGenerator';
 
@@ -29,7 +30,12 @@ class Datatable extends Component {
       const { classes, contentType } = this.props;
       // generate headers and 5 rows of dummy data for visuals before adding live data
       let headers = headerGenerator(contentType);
-      let data = dummyGenerator(contentType);
+      let data;
+      // check db for instance keys, and call out for live data
+      if (true) {
+        data = dummyGenerator(contentType);
+      }
+      
       // convert contents to title
       let title;
       if (contentType) title = contentType[0].toUpperCase() + contentType.slice(1);

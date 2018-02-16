@@ -72,7 +72,6 @@ class LoginCard extends Component {
             this.createInstance(queryParams.code, queryParams.state);
         }
         if (db(vendorData.elementKey)) {
-            console.log('storage!');
             this.setState({
                 connected: true
             });
