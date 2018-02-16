@@ -5,15 +5,14 @@ import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';  
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
-
-import ObjectMenu from '../ObjectMenu';
+import WelcomeBox from '../WelcomeBox';
+import ObjectMenu from './ObjectMenu';
 import LoginCardList from '../LoginCardsContainer/LoginCardList';
 import DataTable from '../DataDashboard/DataTable';
 
@@ -116,9 +115,9 @@ class NavBar extends Component {
 
 
   changeRoute = (newRoute) => {
-      this.setState({
-          route: newRoute
-      });
+    this.setState({
+        route: newRoute
+    });
   }
 
   handleDrawerOpen = () => {
@@ -176,24 +175,6 @@ class NavBar extends Component {
       }
     };
 
-    // basic welcome message as filler content
-    const welcome = () => {
-      if (!route){
-        return( <div>
-          <Paper className={classes.root} elevation={4}>
-            <Typography variant="headline" component="h3">
-              Welcome to your integrated application boilerplate app!
-            </Typography>
-            <Typography component="p">
-              Use the menu to connect to some apps or view dummy data before connecting to other data services.
-            </Typography>
-          </Paper>
-        </div>);
-      } else {
-        return null;
-      }
-    }
-
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -225,7 +206,7 @@ class NavBar extends Component {
             })}
           >
             {/* display main content based on route */}
-            {welcome()}
+            <WelcomeBox route={route} classes={classes}/>
             {integrationCards()}
             {dataTable()}
           </main>
