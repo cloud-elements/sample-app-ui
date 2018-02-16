@@ -175,6 +175,8 @@ class NavBar extends Component {
       }
     };
 
+    console.log(classes.content);
+
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -206,7 +208,7 @@ class NavBar extends Component {
             })}
           >
             {/* display main content based on route */}
-            <WelcomeBox route={route} classes={classes}/>
+            <WelcomeBox route={route} classes={classes.content}/>
             {integrationCards()}
             {dataTable()}
           </main>

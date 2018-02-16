@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 // import logo from './logo.svg';
+// import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import Navigation from './components/NavBar/NavBar';
+import { withTheme } from 'material-ui/styles'
 
 // Click handler
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
+// const theme = createMuiTheme();
 
 class App extends Component {
     constructor(props) {
@@ -22,12 +25,21 @@ class App extends Component {
         }
     }
 
+    
+
     render() {
         let {ceKeys, appUrl} = this.state;
         // The Navigation component is the highest level component, it controls the view and routes
         return ( 
+            // <MuiThemeProvider theme={theme}>
+            //     <Navigation
+            //         ceKeys = {ceKeys}
+            //         appUrl = {appUrl}
+            //     />
+            // </MuiThemeProvider>
             <div className = "App">
-                <Navigation ceKeys = {ceKeys}
+                <Navigation
+                    ceKeys = {ceKeys}
                     appUrl = {appUrl}
                 /> 
             </div>
@@ -35,4 +47,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withTheme()(App);
