@@ -40,7 +40,7 @@ class ObjectMenu extends Component {
                         </ListItemIcon>
                         <ListItemText primary="Integrations" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => tableChanger("settings")}>
                         <ListItemIcon>
                             <SettingsIcon />
                         </ListItemIcon>

@@ -208,7 +208,7 @@ class NavBar extends Component {
             })}
           >
             {/* display main content based on route */}
-            <WelcomeBox route={route} classes={classes.content}/>
+            <WelcomeBox route={route} />
             {integrationCards()}
             {dataTable()}
           </main>
