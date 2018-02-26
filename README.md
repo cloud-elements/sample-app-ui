@@ -12,7 +12,19 @@ If you don't have `node` and `npm` installed, do [that](https://docs.npmjs.com/g
 
 > __PROTIP:__ `node` version must be >= `v4.0.0`
 
-Install the node dependencies and create an environment file to store keys and tokens
+Navigate into the project directory and install package dependencies.
+
+```bash
+# Make sure you are in the correct directory
+$ cd cloud-elements-boilerplate
+
+# Install all necessary npm packages:
+$ npm install
+# or
+$ yarn install
+```
+
+Create an environment file to store keys and tokens
 
 ```bash
  $ touch .env
@@ -29,7 +41,7 @@ REACT_APP_CE_ORG={your-cloud-elements-org-token}
 REACT_APP_CE_ENV=[optional for using staging or snapshot, app defaults to production]
 ```
 
-Add your vendor OAuth app keys to the `.env` file. Only one is need for the app to function, but total number is unlimited.
+Add your vendor OAuth app keys to the `.env` file. Only one is needed for the app to function, but total number is unlimited.
 
 ```
 ## Vendor App keys
@@ -45,11 +57,13 @@ Add the https url where your app is available so that vendor OAuth flows know wh
 ## Misc
 REACT_APP_URL=https://c720e32b.ngrok.io
 ```
-```bash 
-# Install all necessary npm packages:
-$ npm install
+
+## Running
+```bash
+# Fire that bad boy up:
+$ yarn start
 # or
-$ yarn install
+$ npm start
 ```
 
 ## Available Scripts
