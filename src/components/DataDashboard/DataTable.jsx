@@ -24,7 +24,11 @@ const styles = theme => ({
 class Datatable extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          data: [
+            {id: 1, "First Name": 'Loading...', "Last Name": 'Loading...', "Email": 'Loading...', "Phone": 'Loading...'},
+          ]
+        };
     }
 
     getObjects = (objectName, elementToken) => {
@@ -44,25 +48,34 @@ class Datatable extends Component {
                 const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
                 // await console.log(response);
                 const json = await response.json();
-                console.log(json);
                 return await json;
             }
             return request();
     }
 
+      componentWillMount() {
+        const { contentType } = this.props;
+        // check db for instance keys, and call out for live data
+        if (db('hubspotcrm')){
+          console.log('token: ' + db('hubspotcrm'));
+          let liveDataRender = async () => {
+            let data = await this.getObjects('SimpleContact', db('hubspotcrm'));
+            let tableData = data.map((object, i) => {
+              return {id: i+1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber};
+            });
+            this.setState({data: tableData});
+          };
+          liveDataRender();
+        } else {
+          this.setState({ data: dummyGenerator(contentType) });
+        }
+      }
+
     render(){
       const { classes, contentType } = this.props;
+      const { data } = this.state;
       // generate headers and 5 rows of dummy data for visuals before adding live data
       let headers = headerGenerator(contentType);
-      let data;
-      // check db for instance keys, and call out for live data
-      if (db('hubspotcrm')){
-        console.log('token: ' + db('hubspotcrm'));
-        this.getObjects('SimpleContact', db('hubspotcrm'));
-      }
-      if (true) {
-        data = dummyGenerator(contentType);
-      }
       
       // convert contents to title
       let title;
