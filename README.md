@@ -4,7 +4,7 @@ Boilerplate code for a bare bones React frontend that can be used to build UI de
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-<img width="1187" alt="UI Screenshot" src="https://user-images.githubusercontent.com/13320316/34920721-25a7a260-f934-11e7-866f-4415b69188f1.png">
+<img width="1187" alt="UI Screenshot" src="https://cl.ly/3R3F2T330n1e/Screen%20Recording%202018-03-02%20at%2010.54%20AM.gif">
 
 
 ## Installation
