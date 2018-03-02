@@ -210,6 +210,7 @@ class NavBar extends Component {
         return (<DataTable 
                   contentType={route}
                   ceKeys={ ceKeys}
+                  baseUrl="https://staging.cloud-elements.com/elements/api-v2"
                 />);
       } else {
         return null;

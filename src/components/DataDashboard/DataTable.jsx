@@ -29,8 +29,9 @@ class Datatable extends Component {
 
     getObjects = (objectName, elementToken) => {
       // fix base url to be CE url not ngrok
-      let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
-      let path= `elements/${objectName}`;
+      let {ceKeys, vendorData, baseUrl} = this.props;
+      let path= `/${objectName}`;
+      let queryParams = `pageSize=50`;
             // The configuration for fetching data
             let config = {
                 method: 'GET',
@@ -40,13 +41,13 @@ class Datatable extends Component {
                 }
             }
             const request = async () => {
-                const response = await fetch(`${baseUrl}/${path}`, config);
-                console.log(response);
+                const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
+                // await console.log(response);
                 const json = await response.json();
                 console.log(json);
                 return await json;
             }
-            request();
+            return request();
     }
 
     render(){
@@ -57,7 +58,7 @@ class Datatable extends Component {
       // check db for instance keys, and call out for live data
       if (db('hubspotcrm')){
         console.log('token: ' + db('hubspotcrm'));
-        this.getObjects('contacts', db('hubspotcrm'));
+        this.getObjects('SimpleContact', db('hubspotcrm'));
       }
       if (true) {
         data = dummyGenerator(contentType);
