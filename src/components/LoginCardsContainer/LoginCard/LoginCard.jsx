@@ -68,7 +68,9 @@ class LoginCard extends Component {
         // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
         if(!queryParams.code) {
             this.getOAuthUrl();
+            console.log(queryParams)
         } else if (queryParams.state === vendorData.elementKey){
+            console.log(queryParams.code)
             this.createInstance(queryParams.code, queryParams.state);
         }
         if (db(vendorData.elementKey)) {

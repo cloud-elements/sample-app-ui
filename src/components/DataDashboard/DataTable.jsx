@@ -5,6 +5,7 @@ import Table, { TableHead, TableBody, TableCell, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+
 import db from 'store2';
 // service for dummy data, later will be for live API calls
 import {dummyGenerator, headerGenerator} from './dummyDataGenerator';
@@ -26,12 +27,38 @@ class Datatable extends Component {
         this.state = {};
     }
 
+    getObjects = (objectName, elementToken) => {
+      // fix base url to be CE url not ngrok
+      let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
+      let path= `elements/${objectName}`;
+            // The configuration for fetching data
+            let config = {
+                method: 'GET',
+                headers: {
+                'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}, Element ${elementToken}`,
+                'Content-Type': 'application/json'
+                }
+            }
+            const request = async () => {
+                const response = await fetch(`${baseUrl}/${path}`, config);
+                console.log(response);
+                const json = await response.json();
+                console.log(json);
+                return await json;
+            }
+            request();
+    }
+
     render(){
       const { classes, contentType } = this.props;
       // generate headers and 5 rows of dummy data for visuals before adding live data
       let headers = headerGenerator(contentType);
       let data;
       // check db for instance keys, and call out for live data
+      if (db('hubspotcrm')){
+        console.log('token: ' + db('hubspotcrm'));
+        this.getObjects('contacts', db('hubspotcrm'));
+      }
       if (true) {
         data = dummyGenerator(contentType);
       }

@@ -10,7 +10,10 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import db from 'store2';
+import queryString from 'query-string';
 
+import { instanceBody } from '../../ce-util';
 import WelcomeBox from '../WelcomeBox';
 import ObjectMenu from './ObjectMenu';
 import LoginCardList from '../LoginCardsContainer/LoginCardList';
@@ -120,6 +123,31 @@ class NavBar extends Component {
     });
   }
 
+
+//   createInstance(oauthCode, state){
+//     let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
+//     let path= `elements/${vendorData.elementKey}/instances`;
+//     let body= instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
+//     let config = {
+//         method: 'POST',
+//         headers: {
+//             'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}`,
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(body)
+//     }
+//     const request = async () => {
+//         console.log(config);
+//         const response = await fetch(`${baseUrl}/${path}`, config);
+//         const json = await response.json();
+//         // store instance token on response
+//         if (await json.token){
+//             await db(state, json.token);
+//         }
+//     }
+//     request();
+// }
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -128,6 +156,16 @@ class NavBar extends Component {
     this.setState({ open: false });
   };
 
+  // componentWillMount() {
+  //   let {vendorData} = this.props;
+  //   let queryParams = queryString.parse(window.location.search);
+  //   // If an OAuth code is detected use it to create an instance
+  //   if (queryParams.state === vendorData.elementKey){
+  //       console.log(queryParams.code)
+  //       this.createInstance(queryParams.code, queryParams.state);
+  //   }
+  // }
+  
   render() {
     const { classes, theme, ceKeys, appUrl } = this.props;
     const { anchor, open, route } = this.state;
@@ -169,13 +207,16 @@ class NavBar extends Component {
 
     const dataTable = () => {
       if (route !== "integrations" && route){
-        return (<DataTable contentType={route}/>);
+        return (<DataTable 
+                  contentType={route}
+                  ceKeys={ ceKeys}
+                />);
       } else {
         return null;
       }
     };
 
-    console.log(classes.content);
+  
 
     return (
       <div className={classes.root}>
