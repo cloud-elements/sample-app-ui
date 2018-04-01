@@ -24,19 +24,12 @@ class App extends Component {
             appUrl: process.env.REACT_APP_URL
         }
     }
-
     
 
     render() {
         let {ceKeys, appUrl} = this.state;
         // The Navigation component is the highest level component, it controls the view and routes
-        return ( 
-            // <MuiThemeProvider theme={theme}>
-            //     <Navigation
-            //         ceKeys = {ceKeys}
-            //         appUrl = {appUrl}
-            //     />
-            // </MuiThemeProvider>
+        return (
             <div className = "App">
                 <Navigation
                     ceKeys = {ceKeys}

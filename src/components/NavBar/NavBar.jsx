@@ -10,8 +10,8 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-import db from 'store2';
-import queryString from 'query-string';
+// import db from 'store2';
+// import queryString from 'query-string';
 
 import { instanceBody } from '../../ce-util';
 import WelcomeBox from '../WelcomeBox';
@@ -110,12 +110,14 @@ const styles = theme => ({
 });
 
 class NavBar extends Component {
-  state = {
-    open: false,
-    anchor: 'left',
-    route: null
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      route: null
+    };  
+  }
+  
 
   changeRoute = (newRoute) => {
     this.setState({
@@ -168,15 +170,15 @@ class NavBar extends Component {
   
   render() {
     const { classes, theme, ceKeys, appUrl } = this.props;
-    const { anchor, open, route } = this.state;
+    const { open, route } = this.state;
 
+    // handles the popout drawer menu, which only appears if state.open is true
     const drawer = (
       <Drawer
         type="persistent"
         classes={{
           paper: classes.drawerPaper,
         }}
-        anchor={anchor}
         open={open}
       >
         <div className={classes.drawerInner}>
@@ -205,27 +207,27 @@ class NavBar extends Component {
       }
     };
 
-    const dataTable = () => {
+    // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
+    const showDataTable = () => {
       if (route !== "integrations" && route){
         return (<DataTable 
                   contentType={route}
                   ceKeys={ ceKeys}
-                  baseUrl="https://staging.cloud-elements.com/elements/api-v2"
+                  baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
                 />);
       } else {
         return null;
       }
     };
 
-  
-
+    // the actual content to be rendered is returned here
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
           <AppBar
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open,
+              [classes[`appBarShift-left`]]: open,
             })}
           >
             <Toolbar disableGutters={!open}>
@@ -244,15 +246,20 @@ class NavBar extends Component {
           </AppBar>
           {drawer}
           <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
+            className={classNames(classes.content, classes[`content-left`], {
               [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
+              [classes[`contentShift-left`]]: open,
             })}
           >
             {/* display main content based on route */}
             <WelcomeBox route={route} />
             {integrationCards()}
-            {dataTable()}
+            {showDataTable()}
+            {/* <DataTable
+              contentType={route}
+              ceKeys={ ceKeys}
+              baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
+            /> */}
           </main>
         </div>
       </div>
