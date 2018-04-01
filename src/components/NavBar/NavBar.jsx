@@ -195,7 +195,7 @@ class NavBar extends Component {
       </Drawer>
     );
     // login cards to be rendered if the integration route is live
-    const integrationCards = () => {
+    const integrationCards = (route) => {
       if (route === "integrations"){
         return (<LoginCardList
           ceKeys={ ceKeys}
@@ -208,16 +208,28 @@ class NavBar extends Component {
     };
 
     // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
-    const showDataTable = () => {
-      if (route !== "integrations" && route){
-        return (<DataTable 
-                  contentType={route}
-                  ceKeys={ ceKeys}
-                  baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
-                />);
-      } else {
-        return null;
+    const showDataTable = (route) => {
+      let tableComponent;
+      switch (route) {
+        case "accounts":
+          tableComponent = (<DataTable
+              contentType="accounts"
+              ceKeys={ ceKeys}
+              baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
+            />);
+          break;
+        case "contacts":
+        tableComponent = (<DataTable
+            contentType="contacts"
+            ceKeys={ ceKeys}
+            baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
+          />);
+          break;
+        default:
+        tableComponent = null
+          break;
       }
+      return tableComponent;
     };
 
     // the actual content to be rendered is returned here
@@ -253,8 +265,8 @@ class NavBar extends Component {
           >
             {/* display main content based on route */}
             <WelcomeBox route={route} />
-            {integrationCards()}
-            {showDataTable()}
+            {integrationCards(route)}
+            {showDataTable(route)}
             {/* <DataTable
               contentType={route}
               ceKeys={ ceKeys}

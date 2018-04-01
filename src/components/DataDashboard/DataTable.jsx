@@ -25,10 +25,49 @@ class Datatable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: [
-            {id: 1, "First Name": 'Loading...', "Last Name": 'Loading...', "Email": 'Loading...', "Phone": 'Loading...'},
-          ]
+          headers: [],
+          data: this.setDefaultData(props.contentType)
         };
+    }
+
+    setDefaultData = (contentType) => {
+      // const {contentType} = this.props;
+      let data = [];
+      switch (contentType) {
+        case "contacts":
+          data = [
+            {id: 1, "First Name": 'Loading...', "Last Name": 'Loading...', "Email": 'Loading...', "Phone": 'Loading...'},
+          ];
+          break;
+        case "accounts":
+          data = [
+            {id: 1, "Company Name": 'Loading...', "Zip Code": 'Loading...', "Phone": 'Loading...'},
+          ]
+          break;
+        default:
+          break;
+      }
+      return data;
+    }
+
+    updateCustomData = (contentType) => {
+        // check db for instance keys, and call out for live data
+        console.log('when does the comp mount?');
+        let returnData;
+        if (db('hubspotcrm')){
+          console.log('token: ' + db('hubspotcrm'));
+          let liveDataRender = async () => {
+            let data = await this.getObjects('SimpleContact', db('hubspotcrm'));
+            let tableData = data.map((object, i) => {
+              return {id: i+1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber};
+            });
+            return await tableData;
+          };
+          returnData = liveDataRender();
+        } else {
+          returnData = dummyGenerator(contentType);
+        }
+        return returnData;
     }
 
     getObjects = (objectName, elementToken) => {
@@ -53,29 +92,31 @@ class Datatable extends Component {
             return request();
     }
 
-      componentWillMount() {
-        const { contentType } = this.props;
-        // check db for instance keys, and call out for live data
-        if (db('hubspotcrm')){
-          console.log('token: ' + db('hubspotcrm'));
-          let liveDataRender = async () => {
-            let data = await this.getObjects('SimpleContact', db('hubspotcrm'));
-            let tableData = data.map((object, i) => {
-              return {id: i+1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber};
-            });
-            this.setState({data: tableData});
-          };
-          liveDataRender();
-        } else {
-          this.setState({ data: dummyGenerator(contentType) });
+    componentWillMount() {
+      // const { contentType } = this.props;
+      // this.updateCustomData(contentType);
+      console.log('something is happening...');
+      this.setState((prevState, props) => {
+        
+        return {
+          data: this.updateCustomData(props.contentType),
+          headers: headerGenerator(props.contentType)
         }
-      }
+      });
+    }
+
+    // componentDidMount() {
+    //   const { contentType } = this.props;
+    //   // this.updateCustomData(contentType);
+    //   this.setState({
+    //     data: this.updateCustomData(contentType),
+    //     headers: headerGenerator(contentType)
+    //   });
+    // }
 
     render(){
       const { classes, contentType } = this.props;
-      const { data } = this.state;
-      // generate headers and 5 rows of dummy data for visuals before adding live data
-      let headers = headerGenerator(contentType);
+      const { headers, data } = this.state;
       
       // convert contents to title
       let title;
