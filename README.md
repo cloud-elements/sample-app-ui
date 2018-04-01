@@ -2,7 +2,7 @@
 
 Boilerplate code for a bare bones React frontend that can be used to build UI demos on the Cloud Elements APIs
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+> The app has no routing implementations or 3rd party state management tools to leave the code as beginner friendly as possible. If you're interested in a version of this app that contains either or both of the above, please file an [issue](https://github.com/cloud-elements/saas-demo-boilerplate-ui/issues/new).
 
 <img width="1187" alt="UI Screenshot" src="https://cl.ly/3R3F2T330n1e/Screen%20Recording%202018-03-02%20at%2010.54%20AM.gif">
 
@@ -65,6 +65,8 @@ $ yarn start
 # or
 $ npm start
 ```
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## Available Scripts
 
