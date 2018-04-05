@@ -125,31 +125,6 @@ class NavBar extends Component {
     });
   }
 
-
-//   createInstance(oauthCode, state){
-//     let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
-//     let path= `elements/${vendorData.elementKey}/instances`;
-//     let body= instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
-//     let config = {
-//         method: 'POST',
-//         headers: {
-//             'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}`,
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(body)
-//     }
-//     const request = async () => {
-//         console.log(config);
-//         const response = await fetch(`${baseUrl}/${path}`, config);
-//         const json = await response.json();
-//         // store instance token on response
-//         if (await json.token){
-//             await db(state, json.token);
-//         }
-//     }
-//     request();
-// }
-
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -157,16 +132,6 @@ class NavBar extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-
-  // componentWillMount() {
-  //   let {vendorData} = this.props;
-  //   let queryParams = queryString.parse(window.location.search);
-  //   // If an OAuth code is detected use it to create an instance
-  //   if (queryParams.state === vendorData.elementKey){
-  //       console.log(queryParams.code)
-  //       this.createInstance(queryParams.code, queryParams.state);
-  //   }
-  // }
   
   render() {
     const { classes, theme, ceKeys, appUrl } = this.props;
@@ -209,27 +174,13 @@ class NavBar extends Component {
 
     // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
     const showDataTable = (route) => {
-      let tableComponent;
-      switch (route) {
-        case "accounts":
-          tableComponent = (<DataTable
-              contentType="accounts"
-              ceKeys={ ceKeys}
-              baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
-            />);
-          break;
-        case "contacts":
-        tableComponent = (<DataTable
-            contentType="contacts"
-            ceKeys={ ceKeys}
-            baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
-          />);
-          break;
-        default:
-        tableComponent = null
-          break;
+      if (route && route != "settings" && route != "integrations"){
+        return(<DataTable
+          contentType={ route }
+          ceKeys={ ceKeys}
+          baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
+        />);
       }
-      return tableComponent;
     };
 
     // the actual content to be rendered is returned here
@@ -267,11 +218,6 @@ class NavBar extends Component {
             <WelcomeBox route={route} />
             {integrationCards(route)}
             {showDataTable(route)}
-            {/* <DataTable
-              contentType={route}
-              ceKeys={ ceKeys}
-              baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
-            /> */}
           </main>
         </div>
       </div>
