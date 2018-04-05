@@ -92,7 +92,7 @@ class Datatable extends Component {
             return request();
     }
 
-    componentWillMount() {
+    componentWillReceiveProps() {
       // const { contentType } = this.props;
       // this.updateCustomData(contentType);
       console.log('something is happening...');
@@ -104,15 +104,6 @@ class Datatable extends Component {
         }
       });
     }
-
-    // componentDidMount() {
-    //   const { contentType } = this.props;
-    //   // this.updateCustomData(contentType);
-    //   this.setState({
-    //     data: this.updateCustomData(contentType),
-    //     headers: headerGenerator(contentType)
-    //   });
-    // }
 
     render(){
       const { classes, contentType } = this.props;
