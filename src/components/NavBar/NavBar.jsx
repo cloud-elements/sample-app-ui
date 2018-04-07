@@ -159,29 +159,7 @@ class NavBar extends Component {
         </div>
       </Drawer>
     );
-    // login cards to be rendered if the integration route is live
-    const integrationCards = (route) => {
-      if (route === "integrations"){
-        return (<LoginCardList
-          ceKeys={ ceKeys}
-          appUrl={ appUrl}
-          route={route}
-        />);
-      } else {
-        return null;
-      }
-    };
 
-    // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
-    const showDataTable = (route) => {
-      if (route && route != "settings" && route != "integrations"){
-        return(<DataTable
-          contentType={ route }
-          ceKeys={ ceKeys}
-          baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
-        />);
-      }
-    };
 
     // the actual content to be rendered is returned here
     return (
@@ -214,10 +192,7 @@ class NavBar extends Component {
               [classes[`contentShift-left`]]: open,
             })}
           >
-            {/* display main content based on route */}
-            <WelcomeBox route={route} />
-            {integrationCards(route)}
-            {showDataTable(route)}
+            <MainContent route={route} />
           </main>
         </div>
       </div>
