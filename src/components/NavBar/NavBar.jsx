@@ -18,6 +18,7 @@ import WelcomeBox from '../WelcomeBox';
 import ObjectMenu from './ObjectMenu';
 import LoginCardList from '../LoginCardsContainer/LoginCardList';
 import DataTable from '../DataDashboard/DataTable';
+import MainContent from '../MainContent';
 
 const drawerWidth = 240;
 
@@ -192,7 +193,11 @@ class NavBar extends Component {
               [classes[`contentShift-left`]]: open,
             })}
           >
-            <MainContent route={route} />
+            <MainContent 
+              route={route}
+              ceKeys={ceKeys}
+              appUrl={appUrl}
+            />
           </main>
         </div>
       </div>

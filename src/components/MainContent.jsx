@@ -11,13 +11,21 @@ import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
+
+import LoginCardList from './LoginCardsContainer/LoginCardList';
+import integrationCards from './LoginCardsContainer/LoginCard/LoginCard';
+import WelcomeBox from './WelcomeBox';
+import DataTable from './DataDashboard/DataTable';
+
 class MainContentContainer extends Component {
     constructor(props){
         super(props);
     }
 
     // login cards to be rendered if the integration route is live
-    integrationCards = (route) => {
+    integrationCards = (route, ceKeys, appUrl) => {
+        // const {ceKeys, appUrl, route} = this.props;
+
         if (route === "integrations"){
             return (<LoginCardList
                 ceKeys={ ceKeys}
@@ -30,7 +38,8 @@ class MainContentContainer extends Component {
     };
     
     // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
-    showDataTable = (route) => {
+    showDataTable = (route, ceKeys, appUrl) => {
+
         if (route && route != "settings" && route != "integrations"){
             return(<DataTable
                 contentType={ route }
@@ -41,13 +50,17 @@ class MainContentContainer extends Component {
     };
 
     render() {
+        const {ceKeys, appUrl, route} = this.props;
+
         return(
             <div>
                 {/* display main content based on route */}
                 <WelcomeBox route={route} />
-                {integrationCards(route)}
-                {showDataTable(route)}
+                {this.integrationCards(route, ceKeys, appUrl)}
+                {this.showDataTable(route, ceKeys, appUrl)}
             </div>
         );
     }
 }
+
+export default MainContentContainer;

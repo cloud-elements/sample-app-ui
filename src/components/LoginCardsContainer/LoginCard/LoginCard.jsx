@@ -54,7 +54,8 @@ class LoginCard extends Component {
             console.log(config);
             const response = await fetch(`${baseUrl}/${path}`, config);
             const json = await response.json();
-            // store instance token on response
+            // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
+            // but for now it's just hanging out in local storage on 
             if (await json.token){
                 await db(state, json.token);
             }
