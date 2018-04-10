@@ -27,6 +27,7 @@ class LoginCard extends Component {
             'Content-Type': 'application/json'
             }
         }
+        
         const request = async () => {
             const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
             const json = await response.json();
@@ -51,7 +52,7 @@ class LoginCard extends Component {
             body: JSON.stringify(body)
         }
         const request = async () => {
-            console.log(config);
+            // console.log(config);
             const response = await fetch(`${baseUrl}/${path}`, config);
             const json = await response.json();
             // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
