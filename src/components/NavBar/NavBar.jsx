@@ -11,7 +11,6 @@ import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
-import { instanceBody } from '../../ce-util';
 import ObjectMenu from './ObjectMenu';
 import MainContent from '../MainContent';
 import NavBarStyles from './NavBarStyles';

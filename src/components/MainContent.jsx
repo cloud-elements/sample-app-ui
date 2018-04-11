@@ -1,19 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import classNames from 'classnames';
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';  
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
-import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
-import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-
 
 import LoginCardList from './LoginCardsContainer/LoginCardList';
-import integrationCards from './LoginCardsContainer/LoginCard/LoginCard';
 import WelcomeBox from './WelcomeBox';
 import DataTable from './DataDashboard/DataTable';
 
@@ -40,7 +27,7 @@ class MainContentContainer extends Component {
     // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
     showDataTable = (route, ceKeys, appUrl) => {
 
-        if (route && route != "settings" && route != "integrations"){
+        if (route && route !== "settings" && route !== "integrations"){
             return(<DataTable
                 contentType={ route }
                 ceKeys={ ceKeys}
