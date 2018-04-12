@@ -5,9 +5,6 @@ import WelcomeBox from './WelcomeBox';
 import DataTable from './DataDashboard/DataTable';
 
 class MainContentContainer extends Component {
-    constructor(props){
-        super(props);
-    }
 
     // login cards to be rendered if the integration route is live
     integrationCards = (route, ceKeys, appUrl) => {
