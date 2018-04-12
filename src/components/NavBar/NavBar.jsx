@@ -10,14 +10,8 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-// import db from 'store2';
-// import queryString from 'query-string';
 
-import { instanceBody } from '../../ce-util';
-import WelcomeBox from '../WelcomeBox';
 import ObjectMenu from './ObjectMenu';
-import LoginCardList from '../LoginCardsContainer/LoginCardList';
-import DataTable from '../DataDashboard/DataTable';
 import MainContent from '../MainContent';
 
 const drawerWidth = 240;
