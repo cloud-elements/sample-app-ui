@@ -1,4 +1,6 @@
-const styles = (theme, drawerWidth) => ({
+const styles = theme => {
+  const drawerWidth = 240;
+  return ({
     root: {
       width: '100%',
       zIndex: 1,
@@ -85,5 +87,6 @@ const styles = (theme, drawerWidth) => ({
       marginRight: 0,
     },
   });
+};
 
   export default styles;

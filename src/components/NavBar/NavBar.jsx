@@ -13,11 +13,7 @@ import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
 import ObjectMenu from './ObjectMenu';
 import MainContent from '../MainContent';
-import NavBarStyles from './NavBarStyles';
-
-const drawerWidth = 240;
-
-const styles = (theme, drawerWidth) => (NavBarStyles(theme, drawerWidth));
+import styles from './NavBarStyles';
 
 class NavBar extends Component {
   constructor(props) {
