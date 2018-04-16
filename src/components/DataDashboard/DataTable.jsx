@@ -52,10 +52,8 @@ class Datatable extends Component {
 
     updateCustomData = (contentType) => {
         // check db for instance keys, and call out for live data
-        console.log('when does the comp mount?');
         let returnData;
         if (db('hubspotcrm')){
-          console.log('token: ' + db('hubspotcrm'));
           let liveDataRender = async () => {
             let data = await this.getObjects('SimpleContact', db('hubspotcrm'));
             let tableData = data.map((object, i) => {
@@ -72,7 +70,7 @@ class Datatable extends Component {
 
     getObjects = (objectName, elementToken) => {
       // fix base url to be CE url not ngrok
-      let {ceKeys, vendorData, baseUrl} = this.props;
+      let {ceKeys, baseUrl} = this.props;
       let path= `/${objectName}`;
       let queryParams = `pageSize=50`;
             // The configuration for fetching data
@@ -85,7 +83,6 @@ class Datatable extends Component {
             }
             const request = async () => {
                 const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
-                // await console.log(response);
                 const json = await response.json();
                 return await json;
             }
@@ -93,11 +90,8 @@ class Datatable extends Component {
     }
 
     componentWillReceiveProps() {
-      // const { contentType } = this.props;
-      // this.updateCustomData(contentType);
-      console.log('something is happening...');
+      // update table component at correct part of lifecycle
       this.setState((prevState, props) => {
-        
         return {
           data: this.updateCustomData(props.contentType),
           headers: headerGenerator(props.contentType)

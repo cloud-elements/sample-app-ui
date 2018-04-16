@@ -7,8 +7,6 @@ const dummyAccounts = [
     {id: 1, "Company Name": "Acme Inc", "Zip Code": "09876", "Phone": "800-555-1234"}
 ]
 
-// add create data function that accurately creates ids for all rows
-
 const dummyGenerator = (contentType) => {
     let data;
     switch (contentType) {
