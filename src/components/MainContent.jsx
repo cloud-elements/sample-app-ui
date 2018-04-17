@@ -9,7 +9,6 @@ class MainContentContainer extends Component {
     // login cards to be rendered if the integration route is live
     integrationCards = (route, ceKeys, appUrl) => {
         // const {ceKeys, appUrl, route} = this.props;
-
         if (route === "integrations"){
             return (<LoginCardList
                 ceKeys={ ceKeys}

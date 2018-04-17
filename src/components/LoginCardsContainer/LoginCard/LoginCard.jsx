@@ -71,8 +71,6 @@ class LoginCard extends Component {
         if(!queryParams.code) {
             this.getOAuthUrl();
         } else if ((queryParams.state === vendorData.elementKey) && !db(vendorData.elementKey)){
-            console.log(queryParams.code)
-            console.log(queryParams.state);
             this.createInstance(queryParams.code, queryParams.state);
         }
         if (db(vendorData.elementKey)) {

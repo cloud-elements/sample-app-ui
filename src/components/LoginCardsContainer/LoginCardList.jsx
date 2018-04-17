@@ -22,29 +22,29 @@ class LoginCardList extends Component {
                     vendorApiKey: process.env.REACT_APP_SFDC_KEY,
                     vendorSecret: process.env.REACT_APP_SFDC_SECRET
                 },
-                {
-                    nameText: "Marketo",
-                    elementKey: "marketo",
-                    vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
-                    vendorSecret: process.env.REACT_APP_MARKETO_SECRET
-                }
+                // {
+                //     nameText: "Marketo",
+                //     elementKey: "marketo",
+                //     vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
+                //     vendorSecret: process.env.REACT_APP_MARKETO_SECRET
+                // }
             ]
         };
     }
 
-    renderLoginCards() {
-        let { ceKeys, appUrl, errorMessage } = this.props;
-        return this.state.elements.map(element => (
-            <LoginCard 
-                key={ element.elementKey }
-                vendorData={ element }
-                ceKeys={ ceKeys }
-                errorMessage={ errorMessage }
-                baseUrl={'https://' + [ceKeys.ceEnv || 'api'] + '.cloud-elements.com/elements/api-v2'}
-                vendorCallbackUrl={ appUrl }
-            />
-        ));
-      }
+    // renderLoginCards() {
+    //     let { ceKeys, appUrl, errorMessage } = this.props;
+    //     return this.state.elements.map(element => (
+    //         <LoginCard 
+    //             key={ element.elementKey }
+    //             vendorData={ element }
+    //             ceKeys={ ceKeys }
+    //             errorMessage={ errorMessage }
+    //             baseUrl={'https://' + [ceKeys.ceEnv || 'api'] + '.cloud-elements.com/elements/api-v2'}
+    //             vendorCallbackUrl={ appUrl }
+    //         />
+    //     ));
+    //   }
 
       render() {
         // retrieve element data from the state obj above

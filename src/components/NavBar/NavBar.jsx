@@ -21,7 +21,7 @@ class NavBar extends Component {
     this.state = {
       open: false,
       route: null
-    };  
+    };
   }
 
   changeRoute = (newRoute) => {

@@ -14,6 +14,7 @@ class ObjectMenu extends Component {
         // this.routeToTable = this.routeToTable.bind(this);
     }
 
+    // TODO: make objectMenu based on array of objects
     render(){
         const {classes, tableChanger} = this.props;
         return(
@@ -21,7 +22,7 @@ class ObjectMenu extends Component {
                 <List component="nav">
                     <ListItem button onClick={() => tableChanger("contacts")}>
                         <ListItemIcon>
-                            <ContactIcon />
+                            <ContactIcon foo=""/>
                         </ListItemIcon>
                         <ListItemText primary="Contacts" />
                     </ListItem>
