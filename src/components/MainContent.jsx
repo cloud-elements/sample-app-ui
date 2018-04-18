@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import LoginCardList from './LoginCardsContainer/LoginCardList';
 import WelcomeBox from './WelcomeBox';
-import DataTable from './DataDashboard/DataTable';
+import DataTableWrapper from './DataDashboard/DataTableWrapper';
 
 class MainContentContainer extends Component {
 
@@ -24,7 +24,7 @@ class MainContentContainer extends Component {
     showDataTable = (route, ceKeys, appUrl) => {
 
         if (route && route !== "settings" && route !== "integrations"){
-            return(<DataTable
+            return(<DataTableWrapper
                 contentType={ route }
                 ceKeys={ ceKeys}
                 baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
