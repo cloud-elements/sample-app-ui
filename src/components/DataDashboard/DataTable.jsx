@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Table, { TableHead, TableBody, TableCell, TableRow } from 'material-ui/Table';
@@ -18,50 +18,50 @@ const styles = theme => ({
 });
 
 class Datatable extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render(){
-      const { classes, contentType, headers, data } = this.props;
-      
-      // convert contents to title
-      let title;
-      if (contentType) title = contentType[0].toUpperCase() + contentType.slice(1);
-      return (
-        <Paper className={classes.root}>
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              {title}
-            </Typography>
-          </Toolbar>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                {headers.map(headerText => {
-                  return(
-                    <TableCell>{headerText}</TableCell>
-                  )
-                })}
-              </TableRow>
-            </TableHead> 
-            <TableBody>
-              {data.map(n => {
-                return(
-                  <TableRow key={n.id}>
-                    {headers.map((headerText) => {
-                      return(
-                        <TableCell>{n[headerText]}</TableCell>
-                      )
-                    })}
-                  </TableRow>
-                );
+  render() {
+    const { classes, contentType, headers, data } = this.props;
+
+    // convert contents to title
+    let title;
+    if (contentType) title = contentType[0].toUpperCase() + contentType.slice(1);
+    return (
+      <Paper className={classes.root}>
+        <Toolbar>
+          <Typography variant="title" color="inherit">
+            {title}
+          </Typography>
+        </Toolbar>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              {headers.map(headerText => {
+                return (
+                  <TableCell>{headerText}</TableCell>
+                )
               })}
-            </TableBody>
-          </Table>
-        </Paper>
-      );
-    };
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map(n => {
+              return (
+                <TableRow key={n.id}>
+                  {headers.map((headerText) => {
+                    return (
+                      <TableCell>{n[headerText]}</TableCell>
+                    )
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
+  };
 }
 
 Datatable.propTypes = {

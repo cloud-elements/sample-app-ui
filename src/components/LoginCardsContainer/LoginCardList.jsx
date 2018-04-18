@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import LoginCard from './LoginCard/LoginCard.jsx';
 import { GridList } from 'material-ui/GridList';
 import './LoginCardList.css';
@@ -46,7 +46,7 @@ class LoginCardList extends Component {
     //     ));
     //   }
 
-      render() {
+    render() {
         // retrieve element data from the state obj above
         let { elements } = this.state;
         // retrieve generic app info from the props passed by App.jsx
@@ -55,18 +55,18 @@ class LoginCardList extends Component {
         return (
             <GridList cols={3}>
                 {elements.map(element => (
-                    <LoginCard 
-                        key={ element.elementKey }
-                        vendorData={ element }
-                        ceKeys={ ceKeys }
-                        errorMessage={ errorMessage }
+                    <LoginCard
+                        key={element.elementKey}
+                        vendorData={element}
+                        ceKeys={ceKeys}
+                        errorMessage={errorMessage}
                         baseUrl={'https://' + [ceKeys.ceEnv || 'api'] + '.cloud-elements.com/elements/api-v2'}
-                        vendorCallbackUrl={ appUrl }
+                        vendorCallbackUrl={appUrl}
                     />
                 ))}
             </GridList>
         );
-      }
+    }
 }
 
 export default LoginCardList;

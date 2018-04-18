@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import Card, { CardActions, CardHeader} from 'material-ui/Card';
+import React, { Component } from 'react';
+import Card, { CardActions, CardHeader } from 'material-ui/Card';
 import queryString from 'query-string';
 import ConnectButton from './ConnectButton';
 import { instanceBody } from '../../../ce-util';
@@ -11,23 +11,23 @@ class LoginCard extends Component {
         this.state = {};
         this.getOAuthUrl = this.getOAuthUrl.bind(this);
         this.createInstance = this.createInstance.bind(this);
-      }
+    }
 
     getOAuthUrl() {
-        let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
+        let { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
         // the normalized Cloud Elements URL for retrieving an OAuth redirect
-        let path= `elements/${vendorData.elementKey}/oauth/url`;
+        let path = `elements/${vendorData.elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
-        let queryParams =`apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        let queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
         // place everything above into an object for fetch to use
         let config = {
             method: 'GET',
             headers: {
-            'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}`,
-            'Content-Type': 'application/json'
+                'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}`,
+                'Content-Type': 'application/json'
             }
         }
-        
+
         const request = async () => {
             const response = await fetch(`${baseUrl}/${path}?${queryParams}`, config);
             const json = await response.json();
@@ -39,11 +39,11 @@ class LoginCard extends Component {
         request();
     }
 
-    createInstance(oauthCode, state){
-        let {ceKeys, vendorData, vendorCallbackUrl, baseUrl} = this.props;
-        let path= `elements/${vendorData.elementKey}/instances`;
+    createInstance(oauthCode, state) {
+        let { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
+        let path = `elements/${vendorData.elementKey}/instances`;
         // create the appropriate request body for the POST /instances API call
-        let body= instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
+        let body = instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
         let config = {
             method: 'POST',
             headers: {
@@ -57,7 +57,7 @@ class LoginCard extends Component {
             const json = await response.json();
             // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
             // but for now it's just hanging out in local storage on 
-            if (await json.token){
+            if (await json.token) {
                 await db(state, json.token);
             }
         }
@@ -65,12 +65,12 @@ class LoginCard extends Component {
     }
 
     componentWillMount() {
-        let {vendorData} = this.props;
+        let { vendorData } = this.props;
         let queryParams = queryString.parse(window.location.search);
         // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
-        if(!queryParams.code) {
+        if (!queryParams.code) {
             this.getOAuthUrl();
-        } else if ((queryParams.state === vendorData.elementKey) && !db(vendorData.elementKey)){
+        } else if ((queryParams.state === vendorData.elementKey) && !db(vendorData.elementKey)) {
             this.createInstance(queryParams.code, queryParams.state);
         }
         if (db(vendorData.elementKey)) {
@@ -78,16 +78,16 @@ class LoginCard extends Component {
                 connected: true
             });
         }
-      }
+    }
 
-    render(){
+    render() {
         let { redirectUrl, connected } = this.state;
         let elementName = this.props.vendorData.nameText;
-        let cardSubHeader = "Connect your "+ elementName + " account";
-        if (connected){
+        let cardSubHeader = "Connect your " + elementName + " account";
+        if (connected) {
             cardSubHeader = elementName + " is connected.";
         }
-        return(
+        return (
             <Card
                 className="LoginCard"
                 style={{
@@ -100,7 +100,7 @@ class LoginCard extends Component {
                     subheader={cardSubHeader}
                 />
                 <CardActions>
-                    <ConnectButton 
+                    <ConnectButton
                         connected={connected}
                         redirectUrl={redirectUrl}
                     />
