@@ -13,7 +13,12 @@ const createInstanceBody = (elementKey, code, appURL, vendorData) => {
                 "authentication.type": "oauth2",
                 "oauth.callback.url": (appURL || process.env.APP_URL),
                 "oauth.api.key": vendorData.vendorApiKey,
-                "oauth.api.secret": vendorData.vendorSecret
+                "oauth.api.secret": vendorData.vendorSecret,
+                "event.notification.enabled": true,
+                "event.vendor.type": "webhook",
+                "event.notification.callback.url": (appURL || process.env.APP_URL),
+                "event.notification.signature.key": "coolboilerplateapp",
+                "event.objects": "contacts"
             },
             "tags": [
                 "saas_demo_boilerplate"
