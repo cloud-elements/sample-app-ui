@@ -2,7 +2,7 @@
 
 Boilerplate code for a bare bones React frontend that can be used to build UI demos on the Cloud Elements APIs
 
-> The app has no routing implementations or 3rd party state management tools to leave the code as beginner friendly as possible. If you're interested in a version of this app that contains either or both of the above, please file an [issue](https://github.com/cloud-elements/saas-demo-boilerplate-ui/issues/new).
+> The goal for this code base is to be as beginner friendly as possible. The app has a crude routing implementation and does not utilize any 3rd party state management tools. In addition, it does not include a connected backend, it utilizes browser based local storage for occasions where a backend database would be useful.  If you're interested in a version of this app that contains additional functionality, please file an [issue](https://github.com/cloud-elements/saas-demo-boilerplate-ui/issues/new).
 
 <img width="1187" alt="UI Screenshot" src="https://cl.ly/3R3F2T330n1e/Screen%20Recording%202018-03-02%20at%2010.54%20AM.gif">
 
@@ -41,14 +41,12 @@ REACT_APP_CE_ORG={your-cloud-elements-org-token}
 REACT_APP_CE_ENV=[optional for using staging or snapshot, app defaults to production]
 ```
 
-Add your vendor OAuth app keys to the `.env` file. Only one is needed for the app to function, but total number is unlimited.
+Add your vendor OAuth app keys to the `.env` file. Only one is needed for the app to function, but total number is unlimited. These keys are utilized in the LoginCardList component.
 
 ```
 ## Vendor App keys
 REACT_APP_HUBSPOT_KEY={your-hubspot-oauth-app-key}
 REACT_APP_HUBSPOT_SECRET={your-hubspot-oauth-app-secret}
-REACT_APP_SFDC_KEY={your-sfdc-oauth-app-key}
-REACT_APP_SFDC_SECRET={your-sfdc-oauth-app-secret}
 ```
 
 Add the https url where your app is available so that vendor OAuth flows know where to return to after a user signs in.
