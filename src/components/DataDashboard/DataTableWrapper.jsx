@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { dummyGenerator, headerGenerator } from './dummyDataGenerator';
+import { dummyDataGenerator, dummyHeaderGenerator } from './dummyDataGenerator';
 import DataTable from './DataTable';
 import db from 'store2';
 
@@ -7,28 +7,27 @@ class DataTableWrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            headers: [],
-            data: this.setDefaultData(props.contentType)
+            tableHeader: this.headerRow(props.contentType),
+            tableData: this.setDefaultData(props.contentType)
         };
+        this.headerRow = this.headerRow.bind(this);
+        this.setDefaultData = this.setDefaultData.bind(this);
+    }
+
+    //check for settings and create header row for table
+    headerRow = (contentType) => {
+        if (db.has(contentType)) {
+            // TODO: get custom headers from db
+        } else {
+            return dummyHeaderGenerator(contentType);
+        }
     }
 
     setDefaultData = (contentType) => {
-        // const {contentType} = this.props;
-        let data = [];
-        switch (contentType) {
-            case "contacts":
-                data = [
-                    { id: 1, "First Name": 'Loading...', "Last Name": 'Loading...', "Email": 'Loading...', "Phone": 'Loading...' },
-                ];
-                break;
-            case "accounts":
-                data = [
-                    { id: 1, "Company Name": 'Loading...', "Zip Code": 'Loading...', "Phone": 'Loading...' },
-                ]
-                break;
-            default:
-                break;
-        }
+        let data = [{}];
+        this.headerRow(contentType).forEach(header => {
+            data[0][header] = 'Loading...';
+        });
         return data;
     }
 
@@ -45,7 +44,7 @@ class DataTableWrapper extends Component {
             };
             returnData = liveDataRender();
         } else {
-            returnData = dummyGenerator(contentType);
+            returnData = dummyDataGenerator(contentType);
         }
         return returnData;
     }
@@ -71,25 +70,26 @@ class DataTableWrapper extends Component {
         return request();
     }
 
+
     componentWillReceiveProps() {
         // update table component at correct part of lifecycle
         this.setState((prevState, props) => {
             return {
-                data: this.updateCustomData(props.contentType),
-                headers: headerGenerator(props.contentType)
+                tableHeader: this.headerRow(props.contentType),
+                tableData: this.updateCustomData(props.contentType),
             }
         });
     }
 
     render() {
         const { classes, contentType } = this.props;
-        const { headers, data } = this.state;
+        const { tableHeader, tableData } = this.state;
 
         return (
             <DataTable
                 contentType={contentType}
-                data={data}
-                headers={headers}
+                data={tableData}
+                headers={tableHeader}
             />);
     }
 

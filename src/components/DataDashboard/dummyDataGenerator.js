@@ -1,13 +1,27 @@
-const dummyContacts = [
-    {id: 1, "First Name": 'Jack', "Last Name": 'Black', "Email": 'jack@funny.com', "Phone": '123-456-7890'},
-    {id: 2, "First Name": 'Steve', "Last Name": 'Martin', "Email": 'steve@laughs.com', "Phone": '555-000-4422'}
+const dummyContacts = [{
+        id: 1,
+        "First Name": 'Jack',
+        "Last Name": 'Black',
+        "Email": 'jack@funny.com',
+        "Phone": '123-456-7890'
+    },
+    {
+        id: 2,
+        "First Name": 'Steve',
+        "Last Name": 'Martin',
+        "Email": 'steve@laughs.com',
+        "Phone": '555-000-4422'
+    }
 ]
 
-const dummyAccounts = [
-    {id: 1, "Company Name": "Acme Inc", "Zip Code": "09876", "Phone": "800-555-1234"}
-]
+const dummyAccounts = [{
+    id: 1,
+    "Company Name": "Acme Inc",
+    "Zip Code": "09876",
+    "Phone": "800-555-1234"
+}]
 
-const dummyGenerator = (contentType) => {
+const dummyDataGenerator = (contentType) => {
     let data;
     switch (contentType) {
         case 'contacts':
@@ -26,7 +40,7 @@ const dummyGenerator = (contentType) => {
     return data;
 }
 
-const headerGenerator = (contentType) => {
+const dummyHeaderGenerator = (contentType) => {
     let headers;
     switch (contentType) {
         case 'contacts':
@@ -42,4 +56,7 @@ const headerGenerator = (contentType) => {
     return headers;
 }
 
-export { dummyGenerator, headerGenerator };
+export {
+    dummyDataGenerator,
+    dummyHeaderGenerator
+};
