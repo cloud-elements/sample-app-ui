@@ -6,6 +6,7 @@
         "material-ui": "next",
         "material-ui-icons": "^1.0.0-beta.17",
         "query-string": "^5.0.1",
+        "ramda": "^0.25.0",
         "react": "^15.6.1",
         "react-dom": "^15.6.1",
         "react-scripts": "^1.0.11",
