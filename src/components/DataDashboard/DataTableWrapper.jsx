@@ -31,7 +31,7 @@ class DataTableWrapper extends Component {
         return data;
     }
 
-    updateCustomData = (contentType) => {
+    retrieveLiveData = (contentType) => {
         // check db for instance keys, and call out for live data
         let returnData;
         if (db.get('hubspotcrm')) {
@@ -72,11 +72,12 @@ class DataTableWrapper extends Component {
 
 
     componentWillReceiveProps() {
+        console.log('updating...');
         // update table component at correct part of lifecycle
         this.setState((prevState, props) => {
             return {
                 tableHeader: this.headerRow(props.contentType),
-                tableData: this.updateCustomData(props.contentType),
+                tableData: this.retrieveLiveData(props.contentType),
             }
         });
     }

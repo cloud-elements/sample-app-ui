@@ -29,8 +29,7 @@ const dummyDataGenerator = (contentType) => {
             data = dummyContacts;
             break;
         case 'accounts':
-            // return dummy contact data
-            console.log('we got accountss!');
+            // return dummy account data
             data = dummyAccounts;
             break;
         default:

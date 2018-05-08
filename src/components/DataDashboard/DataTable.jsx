@@ -24,14 +24,14 @@ class Datatable extends Component {
 
   render() {
     const { classes, contentType, headers, data } = this.props;
-
+    
     // convert contents to title
     let title;
     if (contentType) title = contentType[0].toUpperCase() + contentType.slice(1);
     return (
       <Paper className={classes.root}>
         <Toolbar>
-          <Typography variant="title" color="inherit">
+          <Typography color="inherit">
             {title}
           </Typography>
         </Toolbar>

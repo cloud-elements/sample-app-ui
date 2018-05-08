@@ -32,20 +32,6 @@ class LoginCardList extends Component {
         };
     }
 
-    // renderLoginCards() {
-    //     let { ceKeys, appUrl, errorMessage } = this.props;
-    //     return this.state.elements.map(element => (
-    //         <LoginCard 
-    //             key={ element.elementKey }
-    //             vendorData={ element }
-    //             ceKeys={ ceKeys }
-    //             errorMessage={ errorMessage }
-    //             baseUrl={'https://' + [ceKeys.ceEnv || 'api'] + '.cloud-elements.com/elements/api-v2'}
-    //             vendorCallbackUrl={ appUrl }
-    //         />
-    //     ));
-    //   }
-
     render() {
         // retrieve element data from the state obj above
         let { elements } = this.state;
