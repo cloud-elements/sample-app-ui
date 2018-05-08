@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TableCell, TableHead, TableRow } from 'material-ui/Table';
 
@@ -8,11 +8,11 @@ class TableHeader extends Component {
         this.state = {};
     }
 
-    render(){
+    render() {
         const { type } = this.props;
         switch (type) {
             case 'contacts':
-                return(
+                return (
                     <TableHead>
                         <TableRow>
                             <TableCell>Last Name</TableCell>
@@ -22,11 +22,11 @@ class TableHeader extends Component {
                             <TableCell numeric>Job Title</TableCell>
                             <TableCell numeric>Company</TableCell>
                         </TableRow>
-                    </TableHead> 
+                    </TableHead>
                 );
                 break;
             default:
-                return(
+                return (
                     <div>Not content</div>
                 );
                 break;

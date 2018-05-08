@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';  
+import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
@@ -26,7 +26,7 @@ class NavBar extends Component {
 
   changeRoute = (newRoute) => {
     this.setState({
-        route: newRoute
+      route: newRoute
     });
   }
 
@@ -37,7 +37,7 @@ class NavBar extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-  
+
   render() {
     const { classes, theme, ceKeys, appUrl } = this.props;
     const { open, route } = this.state;
@@ -57,7 +57,7 @@ class NavBar extends Component {
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
-          <ObjectMenu 
+          <ObjectMenu
             classes={classes}
             tableChanger={(newRoute) => this.changeRoute(newRoute)}
           />
@@ -97,7 +97,7 @@ class NavBar extends Component {
               [classes[`contentShift-left`]]: open,
             })}
           >
-            <MainContent 
+            <MainContent
               route={route}
               ceKeys={ceKeys}
               appUrl={appUrl}

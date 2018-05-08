@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
-import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ContactIcon from 'material-ui-icons/Contacts';
 import IntegrationIcon from 'material-ui-icons/Extension';
 import SettingsIcon from 'material-ui-icons/Settings';
@@ -11,18 +11,17 @@ class ObjectMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        // this.routeToTable = this.routeToTable.bind(this);
     }
 
     // TODO: make objectMenu based on array of objects
-    render(){
-        const {classes, tableChanger} = this.props;
-        return(
+    render() {
+        const { classes, tableChanger } = this.props;
+        return (
             <div className={classes.root}>
                 <List component="nav">
                     <ListItem button onClick={() => tableChanger("contacts")}>
                         <ListItemIcon>
-                            <ContactIcon foo=""/>
+                            <ContactIcon foo="" />
                         </ListItemIcon>
                         <ListItemText primary="Contacts" />
                     </ListItem>
