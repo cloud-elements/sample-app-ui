@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 
 class ConnectButton extends Component {
@@ -7,13 +7,13 @@ class ConnectButton extends Component {
         this.state = {};
     }
 
-    render(){
-        let {connected, redirectUrl} = this.props;
+    render() {
+        let { connected, redirectUrl } = this.props;
         if (!connected) {
-            return(
+            return (
                 <Button
                     raised
-                    onClick= {function(){
+                    onClick={function () {
                         window.location = redirectUrl
                     }}
                 >
@@ -21,7 +21,7 @@ class ConnectButton extends Component {
                 </Button>
             )
         } else {
-            return(
+            return (
                 <Button
                     raised
                     color="primary"
@@ -30,7 +30,7 @@ class ConnectButton extends Component {
                 </Button>
             )
         }
-        
+
     }
 }
 

@@ -21,7 +21,7 @@ class ObjectMenu extends Component {
                 <List component="nav">
                     <ListItem button onClick={() => tableChanger("contacts")}>
                         <ListItemIcon>
-                            <ContactIcon foo="" />
+                            <ContactIcon />
                         </ListItemIcon>
                         <ListItemText primary="Contacts" />
                     </ListItem>

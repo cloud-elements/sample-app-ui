@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import queryString from 'query-string';
 
 import ObjectMenu from './ObjectMenu';
 import MainContent from '../MainContent';
@@ -22,8 +23,12 @@ class NavBar extends Component {
       open: false,
       route: null
     };
+    this.changeRoute = this.changeRoute.bind(this);
   }
 
+  // primative route handling is tracked simply by attaching a `route` property to state of this high level component
+  // route is passed to the `MainContent` component which renders the correct content based on the route prop
+  // current implemented options for route are `integrations`, `settings`, `contacts`, or `accounts`
   changeRoute = (newRoute) => {
     this.setState({
       route: newRoute
@@ -37,6 +42,14 @@ class NavBar extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+
+  componentWillMount() {
+    const queryParams = queryString.parse(window.location.search);
+    // If an OAuth code is detected change the route to login page
+    if (queryParams.code) {
+        this.changeRoute("integrations");
+    }
+}
 
   render() {
     const { classes, theme, ceKeys, appUrl } = this.props;
