@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "material-ui": "next",
+        "material-ui": "1.0.0-beta.17",
         "material-ui-icons": "^1.0.0-beta.17",
         "query-string": "^5.0.1",
         "ramda": "^0.25.0",
