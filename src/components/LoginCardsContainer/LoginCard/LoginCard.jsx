@@ -8,7 +8,10 @@ import db from 'store2';
 class LoginCard extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            connected: null,
+            redirectUrl: null
+        };
         this.getOAuthUrl = this.getOAuthUrl.bind(this);
         this.createInstance = this.createInstance.bind(this);
     }
@@ -40,11 +43,11 @@ class LoginCard extends Component {
     }
 
     createInstance(oauthCode, state) {
-        let { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
-        let path = `elements/${vendorData.elementKey}/instances`;
+        const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
+        const path = `elements/${vendorData.elementKey}/instances`;
         // create the appropriate request body for the POST /instances API call
-        let body = instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
-        let config = {
+        const body = instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
+        const config = {
             method: 'POST',
             headers: {
                 'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}`,
@@ -58,22 +61,22 @@ class LoginCard extends Component {
             // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
             // but for now it's just hanging out in local storage on 
             if (await json.token) {
-                await db(state, json.token);
+                await db.set(state, json.token);
             }
         }
         request();
     }
 
     componentWillMount() {
-        let { vendorData } = this.props;
-        let queryParams = queryString.parse(window.location.search);
+        const { vendorData } = this.props;
+        const queryParams = queryString.parse(window.location.search);
         // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
         if (!queryParams.code) {
             this.getOAuthUrl();
-        } else if ((queryParams.state === vendorData.elementKey) && !db(vendorData.elementKey)) {
+        } else if ((queryParams.state === vendorData.elementKey) && !db.get(vendorData.elementKey)) {
             this.createInstance(queryParams.code, queryParams.state);
         }
-        if (db(vendorData.elementKey)) {
+        if (db.get(vendorData.elementKey)) {
             this.setState({
                 connected: true
             });
@@ -81,8 +84,8 @@ class LoginCard extends Component {
     }
 
     render() {
-        let { redirectUrl, connected } = this.state;
-        let elementName = this.props.vendorData.nameText;
+        const { redirectUrl, connected } = this.state;
+        const elementName = this.props.vendorData.nameText;
         let cardSubHeader = "Connect your " + elementName + " account";
         if (connected) {
             cardSubHeader = elementName + " is connected.";

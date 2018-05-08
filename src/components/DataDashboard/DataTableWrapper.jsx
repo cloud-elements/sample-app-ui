@@ -34,9 +34,9 @@ class DataTableWrapper extends Component {
     updateCustomData = (contentType) => {
         // check db for instance keys, and call out for live data
         let returnData;
-        if (db('hubspotcrm')) {
-            let liveDataRender = async () => {
-                let data = await this.getObjects('SimpleContact', db('hubspotcrm'));
+        if (db.get('hubspotcrm')) {
+            const liveDataRender = async () => {
+                let data = await this.getObjects('SimpleContact', db.get('hubspotcrm'));
                 let tableData = data.map((object, i) => {
                     return { id: i + 1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber };
                 });
