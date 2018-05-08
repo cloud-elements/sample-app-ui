@@ -9,11 +9,13 @@ class ConnectButton extends Component {
         };
     }
 
-    componentDidUpdate() {
-        // const { redirectUrl } = this.props;
-        this.setState((prevState, props) => {
-            redirectUrl: props.redirectUrl
-        });
+    // update state and trigger re-render when the redirectUrl is retrieved from LoginCard and passsed as new props
+    componentDidUpdate(prevProps) {
+        if (!prevProps.redirectUrl) {
+            this.setState({
+                redirectUrl: this.props.redirectUrl
+            });
+        }
     }
 
     render() {
