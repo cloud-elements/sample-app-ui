@@ -46,12 +46,12 @@ class Datatable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
+            {data.map(row => {
               return (
-                <TableRow key={n.id}>
+                <TableRow key={row.id}>
                   {headers.map((headerText) => {
                     return (
-                      <TableCell>{n[headerText]}</TableCell>
+                      <TableCell>{row[headerText]}</TableCell>
                     )
                   })}
                 </TableRow>

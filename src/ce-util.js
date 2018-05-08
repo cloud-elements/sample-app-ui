@@ -25,7 +25,7 @@ const createInstanceBody = (elementKey, code, appURL, vendorData) => {
             ],
             "name": "SAAS_DEMO_" + (new Date()).getTime()
         };
-    return postInstanceBody;
+        return postInstanceBody;
     } else {
         throw new Error("missing required parameters for instance body");
     }
