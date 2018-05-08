@@ -31,8 +31,6 @@ class App extends Component {
                 <Navigation
                     ceKeys = {ceKeys}
                     appUrl = {appUrl}
-                    propSample = "heyyy"
-                    anotherthing = "foobar"
                 /> 
             </div>
             );

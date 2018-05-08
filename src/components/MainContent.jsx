@@ -8,7 +8,6 @@ class MainContentContainer extends Component {
 
     // login cards to be rendered if the integration route is live
     integrationCards = (route, ceKeys, appUrl) => {
-        // const {ceKeys, appUrl, route} = this.props;
         if (route === "integrations") {
             return (<LoginCardList
                 ceKeys={ceKeys}
@@ -20,9 +19,8 @@ class MainContentContainer extends Component {
         }
     };
 
-    // sets up the data table which is only rendered if state.route is a valid data route like "contacts"
+    // sets up the data table which is only rendered if route is a valid data route like "contacts"
     showDataTable = (route, ceKeys, appUrl) => {
-
         if (route && route !== "settings" && route !== "integrations") {
             return (<DataTableWrapper
                 contentType={route}
@@ -34,7 +32,6 @@ class MainContentContainer extends Component {
 
     render() {
         const { ceKeys, appUrl, route } = this.props;
-
         return (
             <div>
                 {/* display main content based on route */}

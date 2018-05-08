@@ -82,7 +82,7 @@ class DataTableWrapper extends Component {
     }
 
     render() {
-        const { classes, contentType } = this.props;
+        const { contentType } = this.props;
         const { tableHeader, tableData } = this.state;
 
         return (
