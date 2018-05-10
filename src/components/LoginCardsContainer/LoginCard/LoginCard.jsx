@@ -69,17 +69,21 @@ class LoginCard extends Component {
 
     componentWillMount() {
         const { vendorData } = this.props;
-        const queryParams = queryString.parse(window.location.search);
-        // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
-        if (!queryParams.code) {
-            this.getOAuthUrl();
-        } else if ((queryParams.state === vendorData.elementKey) && !db.get(vendorData.elementKey)) {
-            this.createInstance(queryParams.code, queryParams.state);
-        }
+        // first check to see if instance already exists for this element
+        console.log('login card mounting: ' + vendorData.elementKey);
         if (db.get(vendorData.elementKey)) {
+            
             this.setState({
                 connected: true
             });
+        } else {
+            const queryParams = queryString.parse(window.location.search);
+            // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
+            if (!queryParams.code || (queryParams.state !== vendorData.elementKey)) {
+                this.getOAuthUrl();
+            } else {
+                this.createInstance(queryParams.code, queryParams.state);
+            }
         }
     }
 
