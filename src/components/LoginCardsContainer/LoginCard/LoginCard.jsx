@@ -17,7 +17,6 @@ class LoginCard extends Component {
     }
 
     oauthRedirectSend() {
-        console.log('oauth redirect has been fired!');
         const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
         // the normalized Cloud Elements URL for retrieving an OAuth redirect
         const path = `elements/${vendorData.elementKey}/oauth/url`;
@@ -71,16 +70,13 @@ class LoginCard extends Component {
     componentWillMount() {
         const { vendorData } = this.props;
         // first check to see if instance already exists for this element
-        console.log('login card mounting: ' + vendorData.elementKey);
         if (db.get(vendorData.elementKey)) {
             this.setState({
                 connected: true
             });
         } else {
             const queryParams = queryString.parse(window.location.search);
-            // If an OAuth code is not detected retrieve the OAuth redirect url, if one is detected use it to create an instance
-            // if (!queryParams.code || (queryParams.state !== vendorData.elementKey)) {
-            //     this.getOAuthUrl();
+            // If an OAuth code is detected that matches the elementKey of the card use it to create an instance
             if (queryParams.code && (queryParams.state === vendorData.elementKey)) {
                 this.createInstance(queryParams.code, queryParams.state);
             }
