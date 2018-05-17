@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 
 class ConnectButton extends Component {
-
+    // the connect button to create instances
     render() {
         const { connected, oauthRedirectSend } = this.props;
-        // const { redirectUrl } = this.state;
-
         if (!connected) {
             return (
                 <Button

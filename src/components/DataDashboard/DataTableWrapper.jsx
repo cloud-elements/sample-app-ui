@@ -7,8 +7,8 @@ class DataTableWrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tableHeader: this.headerRow(props.contentType),
-            tableData: this.setDefaultData(props.contentType)
+            tableHeader: null,
+            tableData: null
         };
         this.headerRow = this.headerRow.bind(this);
         this.setDefaultData = this.setDefaultData.bind(this);
@@ -23,6 +23,7 @@ class DataTableWrapper extends Component {
         }
     }
 
+    // TODO: make this function with .map
     setDefaultData = (contentType) => {
         let data = [{}];
         this.headerRow(contentType).forEach(header => {
@@ -50,12 +51,11 @@ class DataTableWrapper extends Component {
     }
 
     getObjects = (objectName, elementToken) => {
-        // fix base url to be CE url not ngrok
-        let { ceKeys, baseUrl } = this.props;
-        let path = `/${objectName}`;
-        let queryParams = `pageSize=50`;
+        const { ceKeys, baseUrl } = this.props;
+        const path = `/${objectName}`;
+        const queryParams = `pageSize=50`;
         // The configuration for fetching data
-        let config = {
+        const config = {
             method: 'GET',
             headers: {
                 'Authorization': `User ${ceKeys.userToken}, Organization ${ceKeys.orgToken}, Element ${elementToken}`,
@@ -70,16 +70,19 @@ class DataTableWrapper extends Component {
         return request();
     }
 
-
-    componentWillReceiveProps() {
-        console.log('updating...');
-        // update table component at correct part of lifecycle
-        this.setState((prevState, props) => {
-            return {
-                tableHeader: this.headerRow(props.contentType),
-                tableData: this.retrieveLiveData(props.contentType),
-            }
-        });
+    // when component shows up, decide what to do first
+    componentWillMount() {
+        const {contentType} = this.props;
+        // check db for elementKeys
+        if (db.get("foobar")){
+            // retrieve live data
+        } else {
+            // set defaults
+            this.setState({
+                tableHeader: this.headerRow(contentType),
+                tableData: this.setDefaultData(contentType),
+            });
+        }
     }
 
     render() {
