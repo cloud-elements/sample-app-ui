@@ -38,7 +38,7 @@ class DataTableWrapper extends Component {
         if (db.get('hubspotcrm')) {
             const liveDataRender = async () => {
                 let data = await this.getObjects('SimpleContact', db.get('hubspotcrm'));
-                let tableData = data.map((object, i) => {
+                const tableData = data.map((object, i) => {
                     return { id: i + 1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber };
                 });
                 return await tableData;
@@ -70,18 +70,32 @@ class DataTableWrapper extends Component {
         return request();
     }
 
-    // when component shows up, decide what to do first
-    componentWillMount() {
+    // get the correct headers and data to be pushed to the table
+    getDataforTable(){
         const {contentType} = this.props;
-        // check db for elementKeys
-        if (db.get("foobar")){
+        // for now should always fail
+        if (db.getAll() === "hi"){
             // retrieve live data
+            this.retrieveLiveData(contentType);
         } else {
             // set defaults
             this.setState({
                 tableHeader: this.headerRow(contentType),
-                tableData: this.setDefaultData(contentType),
+                tableData: dummyDataGenerator(contentType),
             });
+        }
+    }
+
+    // when component shows up, decide what to do first
+    componentWillMount() {
+        console.log("mounting...");
+        this.getDataforTable();
+    }
+    // when component is updated with new contentType/route update table
+    componentDidUpdate(prevProps){
+        if (prevProps.contentType !== this.props.contentType) {
+            console.log('updating...');
+            this.getDataforTable();
         }
     }
 

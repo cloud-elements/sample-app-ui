@@ -29,39 +29,39 @@ class Datatable extends Component {
     }
     // convert contents to title
     const title = createTitleText(contentType);
-    return (
-      <Paper className={classes.root}>
-        <Toolbar>
-          <Typography color="inherit">
-            {title}
-          </Typography>
-        </Toolbar>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              {headers.map(headerText => {
+      return (
+        <Paper className={classes.root}>
+          <Toolbar>
+            <Typography color="inherit">
+              {title}
+            </Typography>
+          </Toolbar>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                {headers.map(headerText => {
+                  return (
+                    <TableCell>{headerText}</TableCell>
+                  )
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map(row => {
                 return (
-                  <TableCell>{headerText}</TableCell>
-                )
+                  <TableRow key={row.id}>
+                    {headers.map((headerText) => {
+                      return (
+                        <TableCell>{row[headerText]}</TableCell>
+                      )
+                    })}
+                  </TableRow>
+                );
               })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map(row => {
-              return (
-                <TableRow key={row.id}>
-                  {headers.map((headerText) => {
-                    return (
-                      <TableCell>{row[headerText]}</TableCell>
-                    )
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </Paper>
-    );
+            </TableBody>
+          </Table>
+        </Paper>
+      );
   };
 }
 
