@@ -18,16 +18,17 @@ const styles = theme => ({
 });
 
 class Datatable extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { classes, contentType, headers, data } = this.props;
-    
+    const createTitleText = (contentType) => {
+      if (contentType) {
+        return contentType[0].toUpperCase() + contentType.slice(1);
+      } else {
+        return null
+      }
+    }
     // convert contents to title
-    let title;
-    if (contentType) title = contentType[0].toUpperCase() + contentType.slice(1);
+    const title = createTitleText(contentType);
     return (
       <Paper className={classes.root}>
         <Toolbar>
