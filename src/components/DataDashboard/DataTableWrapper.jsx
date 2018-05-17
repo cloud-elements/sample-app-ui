@@ -32,22 +32,22 @@ class DataTableWrapper extends Component {
         return data;
     }
 
-    retrieveLiveData = (contentType) => {
+    retrieveLiveData = async (contentType) => {
         // check db for instance keys, and call out for live data
-        let returnData;
         if (db.get('hubspotcrm')) {
             const liveDataRender = async () => {
-                let data = await this.getObjects('SimpleContact', db.get('hubspotcrm'));
+                const data = await this.getObjects('SimpleContact', db.get('hubspotcrm'));
+                // transform returned data
+                // TODO: is this necessary?
                 const tableData = data.map((object, i) => {
                     return { id: i + 1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber };
                 });
                 return await tableData;
             };
-            returnData = liveDataRender();
+            return await liveDataRender();
         } else {
-            returnData = dummyDataGenerator(contentType);
+            return dummyDataGenerator(contentType);
         }
-        return returnData;
     }
 
     getObjects = (objectName, elementToken) => {
@@ -74,6 +74,7 @@ class DataTableWrapper extends Component {
     getDataforTable(){
         const {contentType} = this.props;
         // for now should always fail
+        //TODO: change to (db.getAll()) ... and deal with real data!
         if (db.getAll() === "hi"){
             // retrieve live data
             this.retrieveLiveData(contentType);
