@@ -1,6 +1,6 @@
 // Function to return the correct instance body for a given vendor, this is an area where individual nuances pertaining a vendor (Element) must be known - documentation for these nuances can be found here: https://developers.cloud-elements.com/docs/elements.html
 // At the end of the authentication flow, the correct vendor code/token/whatever needs to be sent to Cloud Elements in order to successfully return an `Element Token` to be used to make API calls against the correct vendor instance
-const createInstanceBody = (elementKey, code, appURL, vendorData) => {
+const createInstanceBody = (elementKey, code, appURL, vendorData, realmId) => {
     if (elementKey && code && vendorData) {
         let postInstanceBody = {
             "element": {
@@ -25,10 +25,11 @@ const createInstanceBody = (elementKey, code, appURL, vendorData) => {
             ],
             "name": "SAAS_DEMO_" + (new Date()).getTime()
         };
+        // TODO: deal with realmId for Quickbooks!
         if (elementKey === "quickbooks") {
             postInstanceBody.configuration["use_sandbox"] = true;
             postInstanceBody.configuration["scope"] = "com.intuit.quickbooks.accounting openid profile email phone address"
-            postInstanceBody.providerData.realmId = 123146072806979;
+            postInstanceBody.providerData.realmId = realmId;
         };
         return postInstanceBody;
     } else {
