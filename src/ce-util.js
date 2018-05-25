@@ -25,6 +25,11 @@ const createInstanceBody = (elementKey, code, appURL, vendorData) => {
             ],
             "name": "SAAS_DEMO_" + (new Date()).getTime()
         };
+        if (elementKey === "quickbooks") {
+            postInstanceBody.configuration["use_sandbox"] = true;
+            postInstanceBody.configuration["scope"] = "com.intuit.quickbooks.accounting openid profile email phone address"
+            postInstanceBody.providerData.realmId = 123146072806979;
+        };
         return postInstanceBody;
     } else {
         throw new Error("missing required parameters for instance body");

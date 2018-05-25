@@ -27,7 +27,13 @@ class LoginCardList extends Component {
                 //     elementKey: "marketo",
                 //     vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
                 //     vendorSecret: process.env.REACT_APP_MARKETO_SECRET
-                // }
+                // },
+                {
+                    nameText: "Quickbooks",
+                    elementKey: "quickbooks",
+                    vendorApiKey: process.env.REACT_APP_QUICKBOOKS_KEY,
+                    vendorSecret: process.env.REACT_APP_QUICKBOOKS_SECRET
+                }
             ]
         };
     }

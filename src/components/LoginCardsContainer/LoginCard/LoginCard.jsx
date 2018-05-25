@@ -21,7 +21,10 @@ class LoginCard extends Component {
         // the normalized Cloud Elements URL for retrieving an OAuth redirect
         const path = `elements/${vendorData.elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
-        const queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        let queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        if (vendorData.elementKey === "quickbooks"){
+            queryParams += "&scope=com.intuit.quickbooks.accounting&authentication.type=oauth2";
+        }
         // place everything above into an object for fetch to use
         const config = {
             method: 'GET',
@@ -69,6 +72,7 @@ class LoginCard extends Component {
 
     componentWillMount() {
         const { vendorData } = this.props;
+        console.log(vendorData)
         // first check to see if instance already exists for this element
         if (db.get(vendorData.elementKey)) {
             this.setState({
