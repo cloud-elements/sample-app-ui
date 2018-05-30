@@ -13,19 +13,14 @@ const createInstanceBody = (elementKey, code, appURL, vendorData, realmId) => {
                 "authentication.type": "oauth2",
                 "oauth.callback.url": (appURL || process.env.APP_URL),
                 "oauth.api.key": vendorData.vendorApiKey,
-                "oauth.api.secret": vendorData.vendorSecret,
-                "event.notification.enabled": true,
-                "event.vendor.type": "webhook",
-                "event.notification.callback.url": (appURL || process.env.APP_URL),
-                "event.notification.signature.key": "coolboilerplateapp",
-                "event.objects": "contacts"
+                "oauth.api.secret": vendorData.vendorSecret
             },
             "tags": [
                 "saas_demo_boilerplate"
             ],
             "name": "SAAS_DEMO_" + (new Date()).getTime()
         };
-        // TODO: deal with realmId for Quickbooks!
+        // Deal with realmId and scope for Quickbooks!
         if (elementKey === "quickbooks") {
             postInstanceBody.configuration["use_sandbox"] = true;
             postInstanceBody.configuration["scope"] = "com.intuit.quickbooks.accounting openid profile email phone address"

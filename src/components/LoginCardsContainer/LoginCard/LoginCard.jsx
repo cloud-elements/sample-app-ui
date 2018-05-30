@@ -72,7 +72,6 @@ class LoginCard extends Component {
 
     componentWillMount() {
         const { vendorData } = this.props;
-        console.log(vendorData)
         // first check to see if instance already exists for this element
         if (db.get(vendorData.elementKey)) {
             this.setState({
