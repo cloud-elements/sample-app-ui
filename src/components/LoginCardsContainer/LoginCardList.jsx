@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginCard from './LoginCard/LoginCard.jsx';
-import { GridList } from 'material-ui/GridList';
+import GridList from '@material-ui/core/GridList';
 import './LoginCardList.css';
 
 class LoginCardList extends Component {
