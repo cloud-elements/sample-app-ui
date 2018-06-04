@@ -16,6 +16,12 @@ class LoginCard extends Component {
         this.createInstance = this.createInstance.bind(this);
     }
 
+    checkElementType () {
+        // if oauth continue to oauthRedirectSend
+
+        // else retrieve configs and push to dialog/extended card
+    }
+
     oauthRedirectSend() {
         const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
         // the normalized Cloud Elements URL for retrieving an OAuth redirect
@@ -46,7 +52,7 @@ class LoginCard extends Component {
         const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
         const path = `elements/${vendorData.elementKey}/instances`;
         // create the appropriate request body for the POST /instances API call
-        const body = instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state)
+        const body = instanceBody(vendorData.elementKey, oauthCode, vendorCallbackUrl, vendorData, state);
         const config = {
             method: 'POST',
             headers: {

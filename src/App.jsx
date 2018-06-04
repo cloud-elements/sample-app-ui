@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import logo from './logo.svg';
-import Navigation from './components/NavBar/NavBar';
-import { withTheme } from 'material-ui/styles'
+import NavBar from './components/NavBar/NavBar';
+import { withTheme } from '@material-ui/core/styles'
 
 // Click handler
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -28,7 +28,7 @@ class App extends Component {
         // The Navigation component is the highest level component, it controls the view and routes
         return (
             <div className = "App">
-                <Navigation
+                <NavBar
                     ceKeys = {ceKeys}
                     appUrl = {appUrl}
                 /> 
@@ -38,3 +38,4 @@ class App extends Component {
 }
 
 export default withTheme()(App);
+// export default App;
