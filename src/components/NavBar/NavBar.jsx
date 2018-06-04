@@ -157,11 +157,10 @@ class MiniDrawer extends React.Component {
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
+          <Divider />
           <ObjectMenu
-            classes={classes}
             tableChanger={(newRoute) => this.changeRoute(newRoute)}
           />
-          {/* <Divider /> */}
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
