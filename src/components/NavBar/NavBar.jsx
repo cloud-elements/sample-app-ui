@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,7 +12,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import queryString from 'query-string';
-// import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 import ObjectMenu from './ObjectMenu';
 import MainContent from '../MainContent';
@@ -140,7 +138,7 @@ class MiniDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              Mini variant drawer
+              Cloud Elements Connected UI Boilerplate
             </Typography>
           </Toolbar>
         </AppBar>
@@ -149,7 +147,7 @@ class MiniDrawer extends React.Component {
           classes={{
             paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
           }}
-          open={this.state.open}
+          open={open}
         >
           <div className={classes.toolbar}>
             <IconButton onClick={this.handleDrawerClose}>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Card, { CardActions, CardHeader } from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
 import queryString from 'query-string';
 import ConnectButton from './ConnectButton';
 import { instanceBody } from '../../../ce-util';
@@ -14,12 +16,6 @@ class LoginCard extends Component {
         };
         this.oauthRedirectSend = this.oauthRedirectSend.bind(this);
         this.createInstance = this.createInstance.bind(this);
-    }
-
-    checkElementType () {
-        // if oauth continue to oauthRedirectSend
-
-        // else retrieve configs and push to dialog/extended card
     }
 
     oauthRedirectSend() {

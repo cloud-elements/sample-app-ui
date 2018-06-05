@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import logo from './logo.svg';
 import NavBar from './components/NavBar/NavBar';
 import { withTheme } from '@material-ui/core/styles'
 
@@ -38,4 +37,3 @@ class App extends Component {
 }
 
 export default withTheme()(App);
-// export default App;
