@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 class ConnectButton extends Component {
     // the connect button to create instances
@@ -8,7 +8,7 @@ class ConnectButton extends Component {
         if (!connected) {
             return (
                 <Button
-                    raised
+                    variant="raised"
                     onClick={function(){
                         oauthRedirectSend();
                     }}
@@ -19,7 +19,7 @@ class ConnectButton extends Component {
         } else {
             return (
                 <Button
-                    raised
+                    variant="raised"
                     color="primary"
                 >
                     Manage
