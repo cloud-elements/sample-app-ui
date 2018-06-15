@@ -45,6 +45,17 @@ class DataTableWrapper extends Component {
                 return await tableData;
             };
             return await liveDataRender();
+        } else if (db.get('shopify')) {
+            const liveDataRender = async () => {
+                const data = await this.getObjects('SimpleOrders', db.get('shopify'));
+                // transform returned data
+                // TODO: is this necessary?
+                const tableData = data.map((object, i) => {
+                    return { id: i + 1, "Order Total": object.totalValue, "Num of Items": object.numItems, "Email": object.email, "Status": object.status };
+                });
+                return await tableData;
+            };
+            return await liveDataRender();
         } else {
             return dummyDataGenerator(contentType);
         }

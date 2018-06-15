@@ -10,6 +10,7 @@ import ContactIcon from '@material-ui/icons/Contacts';
 import IntegrationIcon from '@material-ui/icons/Extension';
 import SettingsIcon from '@material-ui/icons/Settings';
 import AccountIcon from '@material-ui/icons/Work';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const styles = theme => ({
     root: {
@@ -43,6 +44,12 @@ class ObjectMenu extends Component {
                             <AccountIcon />
                         </ListItemIcon>
                         <ListItemText primary="Accounts" />
+                    </ListItem>
+                    <ListItem button onClick={() => tableChanger("orders")}>
+                        <ListItemIcon>
+                            <ShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Orders" />
                     </ListItem>
                 </List>
                 <Divider />
