@@ -21,6 +21,14 @@ const dummyAccounts = [{
     "Phone": "800-555-1234"
 }]
 
+const dummyOrders =[{
+    id: 1,
+    "Order Total": "$10.09",
+    "Num of Items": "2",
+    "Email": "charlie@chocolate.com",
+    "Status": "paid"
+}]
+
 const dummyDataGenerator = (contentType) => {
     let data;
     switch (contentType) {
@@ -31,6 +39,10 @@ const dummyDataGenerator = (contentType) => {
         case 'accounts':
             // return dummy account data
             data = dummyAccounts;
+            break;
+        case 'orders':
+            // return dummy account data
+            data = dummyOrders;
             break;
         default:
             data = [];
@@ -47,6 +59,9 @@ const dummyHeaderGenerator = (contentType) => {
             break;
         case 'accounts':
             headers = Object.keys(dummyAccounts[0]).filter(key => key !== 'id');
+            break;
+        case 'orders':
+            headers = Object.keys(dummyOrders[0]).filter(key => key !== 'id');
             break;
         default:
             headers = [];

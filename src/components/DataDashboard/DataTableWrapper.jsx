@@ -34,28 +34,33 @@ class DataTableWrapper extends Component {
 
     retrieveLiveData = async (contentType) => {
         // check db for instance keys, and call out for live data
-        if (db.get('hubspotcrm')) {
-            const liveDataRender = async () => {
-                const data = await this.getObjects('SimpleContact', db.get('hubspotcrm'));
-                // transform returned data
-                // TODO: is this necessary?
-                const tableData = data.map((object, i) => {
-                    return { id: i + 1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber };
-                });
-                return await tableData;
-            };
-            return await liveDataRender();
-        } else if (db.get('shopify')) {
-            const liveDataRender = async () => {
-                const data = await this.getObjects('SimpleOrders', db.get('shopify'));
-                // transform returned data
-                // TODO: is this necessary?
-                const tableData = data.map((object, i) => {
-                    return { id: i + 1, "Order Total": object.totalValue, "Num of Items": object.numItems, "Email": object.email, "Status": object.status };
-                });
-                return await tableData;
-            };
-            return await liveDataRender();
+        if (contentType === "contacts") {
+            if (db.get('hubspotcrm')) {
+                const liveDataRender = async () => {
+                    const data = await this.getObjects('SimpleContact', db.get('hubspotcrm'));
+                    // transform returned data
+                    // TODO: is this necessary?
+                    const tableData = data.map((object, i) => {
+                        return { id: i + 1, "First Name": object.firstName, "Last Name": object.lastName, "Email": object.email, "Phone": object.phoneNumber };
+                    });
+                    return await tableData;
+                };
+                return await liveDataRender();
+            }
+        } else if (contentType === 'orders') {
+            if (db.get('shopify')) {
+                const liveDataRender = async () => {
+                    const data = await this.getObjects('SimpleOrders', db.get('shopify'));
+                    // transform returned data
+                    // TODO: is this necessary?
+                    const tableData = data.map((object, i) => {
+                        return { id: i + 1, "Order Total": object.totalValue, "Num of Items": object.numItems, "Email": object.email, "Status": object.status };
+                    });
+                    console.log(tableData);
+                    return await tableData;
+                };
+                return await liveDataRender();
+            }
         } else {
             return dummyDataGenerator(contentType);
         }
@@ -82,12 +87,19 @@ class DataTableWrapper extends Component {
     }
 
     // get the correct headers and data to be pushed to the table
-    getDataforTable(){
-        const {contentType} = this.props;
+    getDataforTable() {
+        const { contentType } = this.props;
+        console.log('whats in that db?? ------');
+        console.log(db.getAll()); // returns obj with keys in storage
+        console.log("---------------");
         // for now should always fail
         //TODO: change to (db.getAll()) ... and deal with real data!
-        if (db.getAll() === "hi"){
+        if (db.getAll().shopify) {
             // retrieve live data
+            this.setState({
+                tableHeader: this.headerRow(contentType),
+                tableData: this.setDefaultData(contentType)
+            });
             this.retrieveLiveData(contentType);
         } else {
             // set defaults
@@ -104,7 +116,7 @@ class DataTableWrapper extends Component {
         this.getDataforTable();
     }
     // when component is updated with new contentType/route update table
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps) {
         if (prevProps.contentType !== this.props.contentType) {
             console.log('updating...');
             this.getDataforTable();
