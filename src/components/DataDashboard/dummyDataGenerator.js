@@ -24,7 +24,7 @@ const dummyAccounts = [{
 const dummyOrders =[{
     id: 1,
     "Order Total": "$10.09",
-    "Num of Items": "2",
+    "Customer Name": "Charlie Bucket",
     "Email": "charlie@chocolate.com",
     "Status": "paid"
 }]

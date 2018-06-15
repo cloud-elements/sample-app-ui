@@ -18,7 +18,7 @@ const createInstanceBody = (elementKey, code, appURL, vendorData, realmId) => {
             "tags": [
                 "saas_demo_boilerplate"
             ],
-            "name": "SAAS_DEMO_" + (new Date()).getTime()
+            "name": "Boilerplate_Demo_" + elementKey + " " + (new Date()).getTime()
         };
         // Deal with realmId and scope for Quickbooks!
         if (elementKey === "quickbooks") {
