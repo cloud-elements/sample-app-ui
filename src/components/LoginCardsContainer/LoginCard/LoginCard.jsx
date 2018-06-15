@@ -24,8 +24,12 @@ class LoginCard extends Component {
         const path = `elements/${vendorData.elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
         let queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        // handle special cases
+        // TODO put this in ce-util and handle more smoothly
         if (vendorData.elementKey === "quickbooks"){
             queryParams += "&scope=com.intuit.quickbooks.accounting&authentication.type=oauth2";
+        } else if (vendorData.elementKey === "shopify") {
+            queryParams += "&siteAddress=cloudelements-demo";
         }
         // place everything above into an object for fetch to use
         const config = {
@@ -45,6 +49,7 @@ class LoginCard extends Component {
     }
 
     createInstance(oauthCode, state) {
+        console.log(oauthCode);
         const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
         const path = `elements/${vendorData.elementKey}/instances`;
         // create the appropriate request body for the POST /instances API call
@@ -63,7 +68,13 @@ class LoginCard extends Component {
             // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
             // but for now it's just hanging out in local storage on 
             if (await json.token) {
-                await db.set(state, json.token);
+                await console.log(json.token);
+                if (state) {
+                    await db.set(state, json.token);
+                } else {
+                    await db.set("shopify", json.token);
+                }
+                
                 await this.setState({
                     connected: true
                 });
@@ -81,9 +92,12 @@ class LoginCard extends Component {
             });
         } else {
             const queryParams = queryString.parse(window.location.search);
+            console.log(queryParams);
             // If an OAuth code is detected that matches the elementKey of the card use it to create an instance
             if (queryParams.code && (queryParams.state === vendorData.elementKey)) {
                 this.createInstance(queryParams.code, queryParams.state);
+            } else if (queryParams.shop){
+                this.createInstance(queryParams.code, "shopify");
             }
         }
     }

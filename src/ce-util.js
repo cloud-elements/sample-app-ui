@@ -26,6 +26,10 @@ const createInstanceBody = (elementKey, code, appURL, vendorData, realmId) => {
             postInstanceBody.configuration["scope"] = "com.intuit.quickbooks.accounting openid profile email phone address"
             postInstanceBody.providerData.realmId = realmId;
         };
+        if (elementKey === "shopify") {
+            postInstanceBody.configuration["shopify.site.address"] = "cloudelements-demo";
+            postInstanceBody.configuration["oauth.scope"] = "write_orders,write_products,write_customers";
+        };
         return postInstanceBody;
     } else {
         throw new Error("missing required parameters for instance body");
