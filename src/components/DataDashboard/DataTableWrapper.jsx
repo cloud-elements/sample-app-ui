@@ -75,7 +75,7 @@ class DataTableWrapper extends Component {
         const {contentType} = this.props;
         // for now should always fail
         //TODO: change to (db.getAll()) ... and deal with real data!
-        if (db.getAll() === "hi"){
+        if (db.get("hubspotcrm")){
             // retrieve live data
             this.retrieveLiveData(contentType);
         } else {

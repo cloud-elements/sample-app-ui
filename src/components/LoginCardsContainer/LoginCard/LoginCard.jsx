@@ -23,7 +23,8 @@ class LoginCard extends Component {
         // the normalized Cloud Elements URL for retrieving an OAuth redirect
         const path = `elements/${vendorData.elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
-        let queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        // let queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        let queryParams = `callbackUrl=${vendorCallbackUrl}&isOauthproxy=true&`;
         if (vendorData.elementKey === "quickbooks"){
             queryParams += "&scope=com.intuit.quickbooks.accounting&authentication.type=oauth2";
         }
@@ -57,9 +58,12 @@ class LoginCard extends Component {
             },
             body: JSON.stringify(body)
         }
+        console.log('----instance body--------')
+        console.log(body);
         const request = async () => {
             const response = await fetch(`${baseUrl}/${path}`, config);
             const json = await response.json();
+            console.log(json);
             // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
             // but for now it's just hanging out in local storage on 
             if (await json.token) {
@@ -82,7 +86,8 @@ class LoginCard extends Component {
         } else {
             const queryParams = queryString.parse(window.location.search);
             // If an OAuth code is detected that matches the elementKey of the card use it to create an instance
-            if (queryParams.code && (queryParams.state === vendorData.elementKey)) {
+            // if (queryParams.code && (queryParams.state === vendorData.elementKey)) {
+            if (queryParams.code && queryParams.state && (vendorData.elementKey === 'hubspotcrm')) {
                 this.createInstance(queryParams.code, queryParams.state);
             }
         }
