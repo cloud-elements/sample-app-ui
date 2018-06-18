@@ -28,6 +28,7 @@ class LoginCard extends Component {
         // TODO put this in ce-util and handle more smoothly
         if (vendorData.elementKey === "quickbooks"){
             queryParams += "&scope=com.intuit.quickbooks.accounting&authentication.type=oauth2";
+        //TODO: get the siteAddres from the vendorData
         } else if (vendorData.elementKey === "shopify") {
             queryParams += "&siteAddress=cloudelements-demo";
         }
@@ -49,7 +50,6 @@ class LoginCard extends Component {
     }
 
     createInstance(oauthCode, state) {
-        console.log(oauthCode);
         const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
         const path = `elements/${vendorData.elementKey}/instances`;
         // create the appropriate request body for the POST /instances API call
@@ -74,7 +74,6 @@ class LoginCard extends Component {
                 } else {
                     await db.set("shopify", json.token);
                 }
-                
                 await this.setState({
                     connected: true
                 });
@@ -92,11 +91,11 @@ class LoginCard extends Component {
             });
         } else {
             const queryParams = queryString.parse(window.location.search);
-            console.log(queryParams);
             // If an OAuth code is detected that matches the elementKey of the card use it to create an instance
+            // TODO: move all of this into the "createInstance helper func"
             if (queryParams.code && (queryParams.state === vendorData.elementKey)) {
                 this.createInstance(queryParams.code, queryParams.state);
-            } else if (queryParams.shop){
+            } else if (queryParams.shop && vendorData.elementKey === "shopify"){
                 this.createInstance(queryParams.code, "shopify");
             }
         }

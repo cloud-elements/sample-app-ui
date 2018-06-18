@@ -32,16 +32,19 @@ class LoginCardList extends Component {
                     nameText: "Quickbooks",
                     elementKey: "quickbooks",
                     vendorApiKey: process.env.REACT_APP_QUICKBOOKS_KEY,
-                    vendorSecret: process.env.REACT_APP_QUICKBOOKS_SECRET
+                    vendorSecret: process.env.REACT_APP_QUICKBOOKS_SECRET,
+                    configs: {
+                        sandbox: "boolean"
+                    }
                 },
                 {
                     nameText: "Shopify",
                     elementKey: "shopify",
                     vendorApiKey: process.env.REACT_APP_SHOPIFY_KEY,
                     vendorSecret: process.env.REACT_APP_SHOPIFY_SECRET,
-                    configs: [
-                        "siteAddress"
-                    ]
+                    configs: {
+                        siteAddress: "string"
+                    }
                 }
             ]
         };
