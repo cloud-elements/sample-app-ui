@@ -23,12 +23,16 @@ class LoginCard extends Component {
         // the normalized Cloud Elements URL for retrieving an OAuth redirect
         const path = `elements/${vendorData.elementKey}/oauth/url`;
         // The query parameters with the api key, api secret, and callback url.
-        let queryParams = `apiKey=${vendorData.vendorApiKey}&apiSecret=${vendorData.vendorSecret}&callbackUrl=${vendorCallbackUrl}`;
+        let queryParams = queryString.stringify({
+            apiKey: vendorData.vendorApiKey,
+            apiSecret: vendorData.vendorSecret,
+            callbackUrl: vendorCallbackUrl
+        });
         // handle special cases
         // TODO put this in ce-util and handle more smoothly
         if (vendorData.elementKey === "quickbooks"){
             queryParams += "&scope=com.intuit.quickbooks.accounting&authentication.type=oauth2";
-        //TODO: get the siteAddres from the vendorData
+        //TODO: get the siteAddress from the vendorData
         } else if (vendorData.elementKey === "shopify") {
             queryParams += "&siteAddress=cloudelements-demo";
         }

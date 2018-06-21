@@ -8,7 +8,7 @@ class LoginCardList extends Component {
         super(props);
         this.state = {
             // Authentication tokens specific to each vendor to be included in login options
-            // To add more elements, simply add an object to the elements array, for example uncomment the "salesforce" object
+            // To add more elements, simply add an object to the elements array, for example uncomment the "marketo" object
             elements: [
                 {
                     nameText: "Hubspot Marketing",
@@ -22,12 +22,6 @@ class LoginCardList extends Component {
                     vendorApiKey: process.env.REACT_APP_SFDC_KEY,
                     vendorSecret: process.env.REACT_APP_SFDC_SECRET
                 },
-                // {
-                //     nameText: "Marketo",
-                //     elementKey: "marketo",
-                //     vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
-                //     vendorSecret: process.env.REACT_APP_MARKETO_SECRET
-                // },
                 {
                     nameText: "Quickbooks",
                     elementKey: "quickbooks",
@@ -46,15 +40,21 @@ class LoginCardList extends Component {
                         siteAddress: "string"
                     }
                 }
+                // {
+                //     nameText: "Marketo",
+                //     elementKey: "marketo",
+                //     vendorApiKey: process.env.REACT_APP_MARKETO_KEY,
+                //     vendorSecret: process.env.REACT_APP_MARKETO_SECRET
+                // },
             ]
         };
     }
 
     render() {
         // retrieve element data from the state obj above
-        let { elements } = this.state;
+        const { elements } = this.state;
         // retrieve generic app info from the props passed by App.jsx
-        let { ceKeys, appUrl, errorMessage } = this.props;
+        const { ceKeys, appUrl, errorMessage } = this.props;
         // return as many LoginCards as needed for the number of elements in the state.elements array
         return (
             <GridList cols={3}>

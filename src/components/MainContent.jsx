@@ -12,7 +12,6 @@ class MainContentContainer extends Component {
             return (<LoginCardList
                 ceKeys={ceKeys}
                 appUrl={appUrl}
-                route={route}
             />);
         } else {
             return null;
@@ -20,12 +19,12 @@ class MainContentContainer extends Component {
     };
 
     // sets up the data table which is only rendered if route is a valid data route like "contacts"
-    showDataTable = (route, ceKeys, appUrl) => {
+    showDataTable = (route, ceKeys) => {
         if (route && route !== "settings" && route !== "integrations") {
             return (<DataTableWrapper
                 contentType={route}
                 ceKeys={ceKeys}
-                baseUrl={"https://" + ceKeys.ceEnv + ".cloud-elements.com/elements/api-v2"}
+                baseUrl={"https://" + [ceKeys.ceEnv || "api"] + ".cloud-elements.com/elements/api-v2"}
             />);
         }
     };
@@ -37,7 +36,7 @@ class MainContentContainer extends Component {
                 {/* display main content based on route */}
                 <WelcomeBox route={route} />
                 {this.integrationCards(route, ceKeys, appUrl)}
-                {this.showDataTable(route, ceKeys, appUrl)}
+                {this.showDataTable(route, ceKeys)}
             </div>
         );
     }
