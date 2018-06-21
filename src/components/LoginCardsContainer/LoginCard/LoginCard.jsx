@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Collapse from '@material-ui/core/Collapse';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
 import queryString from 'query-string';
 import ConnectButton from './ConnectButton';
 import { instanceBody } from '../../../ce-util';
@@ -12,11 +17,22 @@ class LoginCard extends Component {
         super(props);
         this.state = {
             connected: null,
-            redirectUrl: null
+            redirectUrl: null,
+            expanded: false,
+            checked: false
         };
         this.oauthRedirectSend = this.oauthRedirectSend.bind(this);
         this.createInstance = this.createInstance.bind(this);
+        this.handleExpandClick = this.handleExpandClick.bind(this);
     }
+
+    handleExpandClick = () => {
+        this.setState({ expanded: !this.state.expanded });
+    };
+
+    handleCheck = name => event => {
+        this.setState({ [name]: event.target.checked });
+    };
 
     oauthRedirectSend() {
         const { ceKeys, vendorData, vendorCallbackUrl, baseUrl } = this.props;
@@ -30,9 +46,9 @@ class LoginCard extends Component {
         });
         // handle special cases
         // TODO put this in ce-util and handle more smoothly
-        if (vendorData.elementKey === "quickbooks"){
+        if (vendorData.elementKey === "quickbooks") {
             queryParams += "&scope=com.intuit.quickbooks.accounting&authentication.type=oauth2";
-        //TODO: get the siteAddress from the vendorData
+            //TODO: get the siteAddress from the vendorData
         } else if (vendorData.elementKey === "shopify") {
             queryParams += "&siteAddress=cloudelements-demo";
         }
@@ -72,7 +88,6 @@ class LoginCard extends Component {
             // store instance token on response -- This should hit an external server API and store token in reference to the logged in user
             // but for now it's just hanging out in local storage on 
             if (await json.token) {
-                await console.log(json.token);
                 if (state) {
                     await db.set(state, json.token);
                 } else {
@@ -99,7 +114,7 @@ class LoginCard extends Component {
             // TODO: move all of this into the "createInstance helper func"
             if (queryParams.code && (queryParams.state === vendorData.elementKey)) {
                 this.createInstance(queryParams.code, queryParams.state);
-            } else if (queryParams.shop && vendorData.elementKey === "shopify"){
+            } else if (queryParams.shop && vendorData.elementKey === "shopify") {
                 this.createInstance(queryParams.code, "shopify");
             }
         }
@@ -108,26 +123,72 @@ class LoginCard extends Component {
     render() {
         const { connected } = this.state;
         const elementName = this.props.vendorData.nameText;
+        const configs =  this.props.vendorData.configs;
         let cardSubHeader = "Connect your " + elementName + " account";
         if (connected) {
             cardSubHeader = elementName + " is connected.";
         }
+        const configForm = () => {
+            if (configs){
+                return (
+                    Object.keys(configs).map((config, i) => {
+                        let field;
+                        switch (configs[config].type) {
+                            case 'string':
+                                field = (
+                                    <TextField
+                                        label={configs[config].label}
+                                        id={i}
+                                        helperText="Some important text"
+                                    />);
+                                break;
+                            case 'boolean':
+                                field = (
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={this.state[config]}
+                                                onChange={this.handleCheck(config)}
+                                                value="checked"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={configs[config].label}
+                                    />)
+                                break;
+                            default:
+                                break;
+                        }
+                    return field;
+                    })
+                )
+            } else {
+                return null;
+            }
+        };
+
         return (
             <Card
                 className="LoginCard"
                 style={{
                     margin: '20px',
                     float: 'left'
-                }}
-            >
+                }}>
                 <CardHeader
                     title={elementName}
                     subheader={cardSubHeader}
                 />
+                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                        {configForm()}
+                    </CardContent>
+                </Collapse>
                 <CardActions>
                     <ConnectButton
                         connected={connected}
                         oauthRedirectSend={this.oauthRedirectSend}
+                        expandConfigs={this.handleExpandClick}
+                        needsConfigure={configs}
                     />
                 </CardActions>
             </Card>

@@ -28,7 +28,10 @@ class LoginCardList extends Component {
                     vendorApiKey: process.env.REACT_APP_QUICKBOOKS_KEY,
                     vendorSecret: process.env.REACT_APP_QUICKBOOKS_SECRET,
                     configs: {
-                        sandbox: "boolean"
+                        sandbox: {
+                            type: "boolean",
+                            label: "Is this a sandbox account?"
+                        }
                     }
                 },
                 {
@@ -37,7 +40,10 @@ class LoginCardList extends Component {
                     vendorApiKey: process.env.REACT_APP_SHOPIFY_KEY,
                     vendorSecret: process.env.REACT_APP_SHOPIFY_SECRET,
                     configs: {
-                        siteAddress: "string"
+                        siteAddress: {
+                            type: "string",
+                            label: "Your Shopify site address"
+                        }
                     }
                 }
                 // {
