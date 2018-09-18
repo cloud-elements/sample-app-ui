@@ -5,15 +5,15 @@ class ConnectButton extends Component {
     // the connect button to create instances
     handleConnectClick(){
         const {oauthRedirectSend, expandConfigs, needsConfigure} = this.props;
-        if (needsConfigure){
-            return function() {
-                expandConfigs();
-            }
-        } else {
+        // if (needsConfigure){
+        //     return function() {
+        //         expandConfigs();
+        //     }
+        // } else {
             return function(){
                 oauthRedirectSend();
             }
-        }
+        // }
     }
     render() {
         const { connected } = this.props;

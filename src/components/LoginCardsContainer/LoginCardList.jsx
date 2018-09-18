@@ -42,7 +42,7 @@ class LoginCardList extends Component {
                     configs: {
                         siteAddress: {
                             type: "string",
-                            label: "Your Shopify site address"
+                            label: "Shopify site address"
                         }
                     }
                 }

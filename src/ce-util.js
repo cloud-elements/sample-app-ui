@@ -28,7 +28,7 @@ const createInstanceBody = (elementKey, code, appURL, vendorData, bonusObj) => {
         };
         if (elementKey === "shopify") {
             postInstanceBody.configuration["shopify.site.address"] = "cloudelements-demo";
-            postInstanceBody.configuration["oauth.scope"] = "write_orders,write_products,write_customers";
+            postInstanceBody.configuration["oauth.scope"] = "write_orders,write_products,write_customers,read_orders,read_all_orders";
         };
         return postInstanceBody;
     } else {
