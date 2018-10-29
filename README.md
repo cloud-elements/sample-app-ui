@@ -1,6 +1,6 @@
 ## Overview
 
-Boilerplate code for a bare bones React frontend that can be used to build UI demos on the Cloud Elements APIs
+Boilerplate code for a bare bones React frontend that can be used to build UI demos and examples on the Cloud Elements APIs. Keep in mind that Cloud Elements is a server-side API library, production applications should not store keys or make API calls directly from client-side code. This project is meerly a source of sample code intended as a tool for gaining familiarity with the Cloud Elements APIs in a user-facing example.
 
 > The goal for this code base is to be as beginner friendly as possible. The app has a crude routing implementation and does not utilize any 3rd party state management tools. In addition, it does not include a connected backend, it utilizes browser based local storage for occasions where a backend database would be useful.  If you're interested in a version of this app that contains additional functionality, please file an [issue](https://github.com/cloud-elements/saas-demo-boilerplate-ui/issues/new).
 
@@ -10,7 +10,7 @@ Boilerplate code for a bare bones React frontend that can be used to build UI de
 ## Installation
 If you don't have `node` and `npm` installed, do [that](https://docs.npmjs.com/getting-started/installing-node) first.
 
-> __PROTIP:__ `node` version must be >= `v4.0.0`
+> __PROTIP:__ `node` version must be >= `7.5.0` and `npm` version must be >= `4.1.2`
 
 Navigate into the project directory and install package dependencies.
 
