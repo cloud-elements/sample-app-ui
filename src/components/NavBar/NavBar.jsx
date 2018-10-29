@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import queryString from 'query-string';
 
@@ -26,6 +25,7 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
+    height: '100vh',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -119,7 +119,7 @@ class MiniDrawer extends React.Component {
   }
 
   render() {
-    const { classes, theme, ceKeys, appUrl } = this.props;
+    const { classes, ceKeys, appUrl } = this.props;
     const { open, route } = this.state;
 
     return (
@@ -151,7 +151,7 @@ class MiniDrawer extends React.Component {
         >
           <div className={classes.toolbar}>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              <ChevronRightIcon />
             </IconButton>
           </div>
           <Divider />
@@ -177,4 +177,4 @@ MiniDrawer.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(MiniDrawer);
+export default withStyles(styles)(MiniDrawer);
